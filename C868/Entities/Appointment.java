@@ -8,7 +8,7 @@ package C868.Entities;
 
 public class Appointment {
 
-    private int appointmentID;
+    private final int appointmentID;
     private String title;
     private String description;
     private String location;

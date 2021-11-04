@@ -54,10 +54,10 @@ public class LoginController implements Initializable {
      * Sets the information to display in the fields based on the user's language setting.
      */
     public void setLabels(){
-        scheduleLogInLabel.setText(Main.resourceBundle.getString("SchedulingApplication"));
-        logInBtn.setText(Main.resourceBundle.getString("login"));
-        userNameLabel.setText(Main.resourceBundle.getString("username"));
-        passwordLabel.setText(Main.resourceBundle.getString("password"));
+        scheduleLogInLabel.setText("SchedulingApplication");
+        logInBtn.setText("login");
+        userNameLabel.setText("username");
+        passwordLabel.setText("password");
     }
 
     /**
@@ -77,8 +77,8 @@ public class LoginController implements Initializable {
         }else {
             loginMessage = getLoginInfo(thisUser, "Unsuccessful");
             loginLogging(loginMessage);
-            errorMessageLabel.setText(Main.resourceBundle.getString("IncorrectUsernameOrPassword"));
-                logInBtn.setText(Main.resourceBundle.getString("Retry"));
+            errorMessageLabel.setText("IncorrectUsernameOrPassword");
+                logInBtn.setText("Retry");
             }
     }
 
