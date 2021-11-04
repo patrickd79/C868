@@ -10,6 +10,3 @@ Login Attempt  User: test, Result: Successful, Timestamp: 2021-11-04 23:34:05.68
 Login Attempt  User: test, Result: Successful, Timestamp: 2021-11-04 23:35:57.723399 UTC
 
 
-Login Attempt  User: test, Result: Successful, Timestamp: 2021-11-04 23:39:28.218089 UTC
-
-

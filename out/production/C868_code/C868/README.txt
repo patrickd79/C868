@@ -1,6 +1,6 @@
 Title : Appointment Management Application
 Version: 1.0
-Date: 10/26/2021
+Date: 11/4/2021
 Purpose: This application is for managing customers and customer appointments.
 Author: Patrick Denney
 Email: pdenney@wgu.edu

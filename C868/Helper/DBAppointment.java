@@ -25,10 +25,13 @@ public class DBAppointment {
      */
     public static int getApptCountForAUser(String id){
         int apptCount = 0;
-        String sqlStmt = "SELECT COUNT(Appointment_ID) AS Appointment_Count FROM APPOINTMENTS WHERE User_ID = '"+id+"';";
+        String sqlStmt = "SELECT COUNT(Appointment_ID) AS Appointment_Count FROM APPOINTMENTS WHERE User_ID = ?;";
+
         try {
             //prepare the sql stmt
             PreparedStatement getApptCountPS = JDBC.getConnection().prepareStatement(sqlStmt);
+            //then insert value to prevent SQL injection attack
+            getApptCountPS.setString(1,id);
             //execute the sql command
             ResultSet results = getApptCountPS.executeQuery();
             while(results.next()) {
@@ -45,10 +48,12 @@ public class DBAppointment {
      * @param id appointment ID
      */
     public static void deleteAppointment(String id){
-        String sqlStmt = " DELETE FROM APPOINTMENTS WHERE Appointment_ID= '"+id+"';";
+        String sqlStmt = " DELETE FROM APPOINTMENTS WHERE Appointment_ID= ?;";
         try {
             //prepare the sql stmt
             PreparedStatement deleteAppointPS = JDBC.getConnection().prepareStatement(sqlStmt);
+            //then insert value to prevent SQL injection attack
+            deleteAppointPS.setString(1,id );
             //execute the sql command
             deleteAppointPS.execute();
         } catch (SQLException throwable) {
@@ -61,10 +66,12 @@ public class DBAppointment {
      * @param id customer ID
      */
     public static void deleteAppointmentsForASingleCustomer(String id){
-        String sqlStmt = " DELETE FROM APPOINTMENTS WHERE Customer_ID= '"+id+"';";
+        String sqlStmt = " DELETE FROM APPOINTMENTS WHERE Customer_ID= ?;";
         try {
             //prepare the sql stmt
             PreparedStatement deleteAppointPS = JDBC.getConnection().prepareStatement(sqlStmt);
+            //then insert value to prevent SQL injection attack
+            deleteAppointPS.setString(1,id );
             //execute the sql command
             deleteAppointPS.execute();
         } catch (SQLException throwable) {
@@ -81,10 +88,12 @@ public class DBAppointment {
     public static ObservableList<Appointment> getAppointmentsForASingleCustomerByID(String id){
         Appointment appt;
         ObservableList<Appointment> appts = FXCollections.observableArrayList();
-        String sqlStmt = "SELECT Appointment_ID, Title, Description, Location, Type, Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID FROM APPOINTMENTS WHERE Customer_ID= '"+id+"';";
+        String sqlStmt = "SELECT Appointment_ID, Title, Description, Location, Type, Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID FROM APPOINTMENTS WHERE Customer_ID= ?;";
         try {
             //prepare the sql stmt
             PreparedStatement customerAppointPS = JDBC.getConnection().prepareStatement(sqlStmt);
+            //then insert value to prevent SQL injection attack
+            customerAppointPS.setString(1,id);
             //execute the sql command
             ResultSet results = customerAppointPS.executeQuery();
 
@@ -124,11 +133,13 @@ public class DBAppointment {
     public static ObservableList<Appointment> getAppointmentsForASingleUserByID(String id){
         Appointment appt;
         ObservableList<Appointment> appts = FXCollections.observableArrayList();
-        String sqlStmt = "SELECT Appointment_ID, Title, Description, Location, Type, Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID FROM APPOINTMENTS WHERE User_ID= '"+id+"';";
-        System.out.println("Get User SQL stmt: "+sqlStmt);
+        String sqlStmt = "SELECT Appointment_ID, Title, Description, Location, Type, Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID FROM APPOINTMENTS WHERE User_ID= ?;";
+        //System.out.println("Get User SQL stmt: "+sqlStmt);
         try {
             //prepare the sql stmt
             PreparedStatement userAppointPS = JDBC.getConnection().prepareStatement(sqlStmt);
+            //then insert value to prevent SQL injection attack
+            userAppointPS.setString(1,id);
             //execute the sql command
             ResultSet results = userAppointPS.executeQuery();
 
@@ -183,12 +194,24 @@ public class DBAppointment {
 
         String sqlStmt = "INSERT into APPOINTMENTS(Title, Description, Location, Type, Start, "+
                 "End, Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, "+
-                "User_ID, Contact_ID)Values('"+title+"', '"+description+"', '"+location+"', '"+type+"', '"+
-                TimeZones.convertToUTCTimeZone(start)+"', '"+TimeZones.convertToUTCTimeZone(end)+"', '"+TimeZones.getUTCTime()+"', '"+createdBy+"', '"+TimeZones.getUTCTime()+"', '"+createdBy+"', '"+customerId+
-                "', '"+userId+"', '"+contactId+"');";
+                "User_ID, Contact_ID)Values(?, ?, ?, ?,?, ?, ?, ?, ?, ?, ? ,?, ?);";
         try {
             //prepare the sql stmt
             PreparedStatement appointPS = JDBC.getConnection().prepareStatement(sqlStmt);
+            //then insert value to prevent SQL injection attack
+            appointPS.setString(1,title);
+            appointPS.setString(2,description);
+            appointPS.setString(3,location);
+            appointPS.setString(4,type);
+            appointPS.setString(5,TimeZones.convertToUTCTimeZone(start));
+            appointPS.setString(6,TimeZones.convertToUTCTimeZone(end));
+            appointPS.setString(7,TimeZones.getUTCTime());
+            appointPS.setString(8,createdBy);
+            appointPS.setString(9,TimeZones.getUTCTime());
+            appointPS.setString(10,createdBy);
+            appointPS.setString(11,customerId);
+            appointPS.setString(12,userId);
+            appointPS.setString(13,contactId);
             //execute the sql command
             appointPS.execute();
         } catch (SQLException throwable) {
@@ -220,27 +243,28 @@ public class DBAppointment {
         String start = startDate+" "+startTime;
         String end = endDate+" "+endTime;
 
-        String sqlStmt = "UPDATE APPOINTMENTS " +
-                "SET" +
-                " Title = '"+title+"'," +
-                " Description = '"+description+"'," +
-                " Location = '"+location+"'," +
-                " Type = '"+type+"'," +
-                " Start = '"+TimeZones.convertToUTCTimeZone(start)+"',"+
-                " End = '"+TimeZones.convertToUTCTimeZone(end)+"',"+
-                " Last_Update = '"+TimeZones.getUTCTime()+"'," +
-                " Last_Updated_By = '"+updatedBy+"'," +
-                " Customer_ID = "+customerID+"," +
-                " User_ID = "+userID+"," +
-                " Contact_ID = "+contactID+"" +
-                " WHERE Appointment_ID = "+id+";";
-
-        System.out.println(sqlStmt);
+        String sqlStmt = "UPDATE APPOINTMENTS SET Title = ?, Description = ?," +
+                " Location = ?,Type = ?,Start = ?,End = ?,Last_Update = ?," +
+                " Last_Updated_By = ?,Customer_ID =?,User_ID = ?,Contact_ID = ?" +
+                " WHERE Appointment_ID = ?;";
         try {
             //prepare the sql stmt
-            PreparedStatement customerPS = JDBC.getConnection().prepareStatement(sqlStmt);
+            PreparedStatement appointPS = JDBC.getConnection().prepareStatement(sqlStmt);
+            //then insert value to prevent SQL injection attack
+            appointPS.setString(1,title);
+            appointPS.setString(2,description);
+            appointPS.setString(3,location);
+            appointPS.setString(4,type);
+            appointPS.setString(5,TimeZones.convertToUTCTimeZone(start));
+            appointPS.setString(6,TimeZones.convertToUTCTimeZone(end));
+            appointPS.setString(7,TimeZones.getUTCTime());
+            appointPS.setString(8,updatedBy);
+            appointPS.setString(9,customerID);
+            appointPS.setString(10,userID);
+            appointPS.setString(11,contactID);
+            appointPS.setString(12,id);
             //execute the sql command
-            customerPS.execute();
+            appointPS.execute();
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }
@@ -300,8 +324,10 @@ public class DBAppointment {
             String sqlStmt = "SELECT " +
                     "Appointment_ID, Title, Description, Location, Type, Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID" +
                     " FROM APPOINTMENTS" +
-                    " WHERE Appointment_ID = "+id+";";
+                    " WHERE Appointment_ID = ?;";
             PreparedStatement apptPS = JDBC.getConnection().prepareStatement(sqlStmt);
+            //then insert value to prevent SQL injection attack
+            apptPS.setString(1,id);
             ResultSet results = apptPS.executeQuery();
 
             while(results.next()){
