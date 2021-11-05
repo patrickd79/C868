@@ -139,6 +139,14 @@ public class MainMenuController {
         window.setScene(addCustomerScene);
         window.show();
     }
+
+    public void goToAddUserWindow(ActionEvent event) throws IOException {
+        Parent addUserWindow = FXMLLoader.load(getClass().getResource("addUser.fxml"));
+        Scene addUserScene = new Scene(addUserWindow);
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(addUserScene);
+        window.show();
+    }
     /**
      * Changes window the Update Customer window.
      * @param event
