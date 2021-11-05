@@ -6,8 +6,14 @@ import C868.Helper.JDBC;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -30,7 +36,7 @@ public class ChooseUserToUpdateController {
     public TableColumn<User, String> lastUpdatedByCol;
     @FXML
     public Label updateUserMessage;
-    String userID;
+    public static String userID;
     String name;
 
     public void setTableView(){
@@ -57,7 +63,10 @@ public class ChooseUserToUpdateController {
 
     public void deleteUser(ActionEvent event) throws IOException {
         userToUpdate();
-        if(userID != null && !name.equals(null)){
+        if(name.equals("admin")){
+            updateUserMessage.setTextFill(Color.RED);
+            updateUserMessage.setText("Administrator cannot be deleted");
+        }else if(userID != null && !name.equals(null)){
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setHeaderText("Confirm User Delete");
             alert.setContentText("Are you sure you want to delete User: "+name+"?" );
@@ -71,6 +80,15 @@ public class ChooseUserToUpdateController {
         }else{
             updateUserMessage.setText("You must select a Customer to delete first.");
         }
+    }
+
+    public void goToUpdateUserWindow(ActionEvent event) throws IOException {
+        userToUpdate();
+        Parent updateUserWindow = FXMLLoader.load(getClass().getResource("updateUser.fxml"));
+        Scene updateUserScene = new Scene(updateUserWindow);
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(updateUserScene);
+        window.show();
     }
 
 

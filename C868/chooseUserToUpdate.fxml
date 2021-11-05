@@ -8,7 +8,7 @@
         <Label layoutX="324.0" layoutY="37.0" text="Choose a User To Update" />
         <Button layoutX="703.0" layoutY="460.0" mnemonicParsing="false" onAction="#goToMainMenuWindow" text="Go To Main Menu" />
 
-        <Button layoutX="51.0" layoutY="459.0" mnemonicParsing="false" text="Update User" />
+        <Button layoutX="51.0" layoutY="459.0" mnemonicParsing="false" onAction="#goToUpdateUserWindow" text="Update User" />
         <TableView fx:id="tableView" layoutX="18.0" layoutY="86.0" prefHeight="253.0" prefWidth="1027.0">
             <columns>
                 <TableColumn fx:id="userIDCol" prefWidth="55.0" text="ID" />

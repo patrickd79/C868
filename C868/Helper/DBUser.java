@@ -14,6 +14,28 @@ import java.sql.SQLException;
  */
 public class DBUser {
 
+    public static void updateUser(String id, String name, String password, String updatedBy){
+
+        String sqlStmt = "UPDATE USERS " +
+                "SET" +
+                " User_Name = '"+name+"'," +
+                " Password = '"+password+"',"+
+                " Last_Update = '"+TimeZones.getUTCTime()+"'," +
+                " Last_Updated_By = '"+updatedBy+"'"+
+                " WHERE User_ID = "+id+";";
+
+        System.out.println(sqlStmt);
+        try {
+            //prepare the sql stmt
+            PreparedStatement customerPS = JDBC.getConnection().prepareStatement(sqlStmt);
+            //execute the sql command
+            customerPS.execute();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+
+    }
+
     public static void deleteUser(String id){
         String sqlStmt = "DELETE FROM USERS WHERE User_ID = "+id+";";
 
@@ -99,7 +121,7 @@ public class DBUser {
                 String createBy = results.getString("Created_By");
                 String lastUpdate = results.getString("Last_Update");
                 String lastUpdateBy = results.getString("Last_Updated_By");
-                user = new User(userID,userName,password,createDate,createBy,lastUpdate,lastUpdateBy);
+                user = new User(userID,userName,password,TimeZones.convertToCurrentTimeZone(createDate)  ,createBy,TimeZones.convertToCurrentTimeZone(lastUpdate),lastUpdateBy);
             }
         }
         catch(SQLException throwable){

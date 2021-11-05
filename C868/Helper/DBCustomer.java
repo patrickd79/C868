@@ -34,18 +34,26 @@ public class DBCustomer {
 
         String sqlStmt = "UPDATE CUSTOMERS " +
                 "SET" +
-                " Customer_Name = '"+name+"'," +
-                " Address = '"+address+"'," +
-                " Postal_Code = '"+postalCode+"'," +
-                " Phone = '"+phone+"'," +
-                " Last_Update = '"+TimeZones.getUTCTime()+"'," +
-                " Last_Updated_By = '"+updatedBy+"'"+
-                " WHERE Customer_ID = "+id+";";
+                " Customer_Name = ?," +
+                " Address = ?," +
+                " Postal_Code = ?," +
+                " Phone = ?," +
+                " Last_Update = ?," +
+                " Last_Updated_By = ?"+
+                " WHERE Customer_ID = ?;";
 
         System.out.println(sqlStmt);
         try {
             //prepare the sql stmt
             PreparedStatement customerPS = JDBC.getConnection().prepareStatement(sqlStmt);
+            //then insert value to prevent SQL injection attack
+            customerPS.setString(1,name);
+            customerPS.setString(2,address);
+            customerPS.setString(3,postalCode);
+            customerPS.setString(4,phone);
+            customerPS.setString(5,TimeZones.getUTCTime());
+            customerPS.setString(6,updatedBy);
+            customerPS.setString(7,id);
             //execute the sql command
             customerPS.execute();
         } catch (SQLException throwable) {
@@ -59,11 +67,13 @@ public class DBCustomer {
      * @param id customer id
      */
     public static void deleteCustomer(String id){
-        String sqlStmt = "DELETE FROM CUSTOMERS WHERE Customer_ID = "+id+";";
+        String sqlStmt = "DELETE FROM CUSTOMERS WHERE Customer_ID = ?;";
 
         try {
             //prepare the sql stmt
             PreparedStatement customerPS = JDBC.getConnection().prepareStatement(sqlStmt);
+            //then insert value to prevent SQL injection attack
+            customerPS.setString(1,id);
             //execute the sql command
             customerPS.execute();
         } catch (SQLException throwable) {
@@ -81,18 +91,21 @@ public class DBCustomer {
      */
     public static void addCustomer(String name, String address, String postalCode, String phone, String createdBy){
 
-        //this creates a local timestamp
-        Date date = new Date();
-        java.sql.Timestamp sqlDate = new java.sql.Timestamp(date.getTime());
-        String create_date = sqlDate.toString();
-
         String sqlStmt = "Insert into CUSTOMERS(Customer_Name, Address, Postal_Code, Phone, Create_Date, " +
                 "Created_By, Last_Update, Last_Updated_By)" +
-                "Values('"+name+"', '"+address+"', '"+postalCode+"', '"+phone+"', '"+TimeZones.getUTCTime()+
-                "', '"+createdBy+"', '"+TimeZones.getUTCTime()+"', '"+createdBy+"');";
+                "Values(?,?,?,?,?,?,?,?);";
         try {
             //prepare the sql stmt
             PreparedStatement customerPS = JDBC.getConnection().prepareStatement(sqlStmt);
+            //then insert value to prevent SQL injection attack
+            customerPS.setString(1,name);
+            customerPS.setString(2,address);
+            customerPS.setString(3,postalCode);
+            customerPS.setString(4,phone);
+            customerPS.setString(5,TimeZones.getUTCTime());
+            customerPS.setString(6,createdBy);
+            customerPS.setString(7,TimeZones.getUTCTime());
+            customerPS.setString(8,createdBy);
             //execute the sql command
             customerPS.execute();
         } catch (SQLException throwable) {
@@ -111,8 +124,10 @@ public class DBCustomer {
 
         try{
             String sqlStmt = "SELECT Customer_ID, Customer_Name, Address, Postal_Code, Phone, Create_Date, Created_By, Last_Update, Last_Updated_By " +
-                    "FROM CUSTOMERS WHERE Customer_Name = '"+name+"';";
+                    "FROM CUSTOMERS WHERE Customer_Name = ?;";
             PreparedStatement customerPS = JDBC.getConnection().prepareStatement(sqlStmt);
+            //then insert value to prevent SQL injection attack
+            customerPS.setString(1,name);
             ResultSet results = customerPS.executeQuery();
             while(results.next()){
                 int customerID = results.getInt("Customer_ID");
@@ -147,8 +162,10 @@ public class DBCustomer {
         Customer cust = null;
         try{
             String sqlStmt = "SELECT Customer_ID, Customer_Name, Address, Postal_Code, Phone, Create_Date, Created_By, Last_Update, Last_Updated_By " +
-                    "FROM CUSTOMERS WHERE Customer_ID = "+id+";";
+                    "FROM CUSTOMERS WHERE Customer_ID = ?;";
             PreparedStatement customerPS = JDBC.getConnection().prepareStatement(sqlStmt);
+            //then insert value to prevent SQL injection attack
+            customerPS.setInt(1,id);
             ResultSet results = customerPS.executeQuery();
             while(results.next()){
                 int customerID = results.getInt("Customer_ID");
