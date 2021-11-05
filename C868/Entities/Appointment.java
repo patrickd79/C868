@@ -38,9 +38,8 @@ public class Appointment {
      * @param lastUpdatedBy The user who updated the appointment information last.
      * @param customerID ID number of the customer associated with the appointment.
      * @param userID ID number of the user associated with the appointment.
-     * @param contactID ID number of the contact associated with the appointment.
      */
-    public Appointment(int appointmentID, String title, String description, String location, String type, String start, String end, String createdDate, String createdBy, String lastUpdate, String lastUpdatedBy, int customerID, int userID, int contactID) {
+    public Appointment(int appointmentID, String title, String description, String location, String type, String start, String end, String createdDate, String createdBy, String lastUpdate, String lastUpdatedBy, int customerID, int userID) {
         this.appointmentID = appointmentID;
         this.title = title;
         this.description = description;
@@ -54,8 +53,9 @@ public class Appointment {
         this.lastUpdatedBy = lastUpdatedBy;
         this.customerID = customerID;
         this.userID = userID;
-        this.contactID = contactID;
     }
+
+
 
     /**
      *

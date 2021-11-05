@@ -1,7 +1,6 @@
 package C868;
 
 import C868.Entities.Appointment;
-import C868.Entities.Contact;
 import C868.Entities.Customer;
 import C868.Entities.User;
 import C868.Helper.*;
@@ -11,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
+
 import java.io.IOException;
 import java.util.Date;
 
@@ -30,29 +30,13 @@ public class AddAppointmentController {
     @FXML
     public ComboBox<String> addAppointmentUserIDField;
     @FXML
-    public ComboBox<String> addAppointmentContactNameField;
-    @FXML
     public Label addApptErrorField;
     @FXML
     public TextField addApptStartTimeField;
     @FXML
     public TextField addApptEndTimeField;
     @FXML
-    public RadioButton startTimeAMToggle;
-    @FXML
-    public ToggleGroup startTime;
-    @FXML
-    public RadioButton startTimePMToggle;
-    @FXML
-    public RadioButton endTimeAMToggle;
-    @FXML
-    public ToggleGroup endTime;
-    @FXML
-    public RadioButton endTimePMToggle;
-    @FXML
     public Button addApptBtn;
-    ObservableList<Contact> contacts = FXCollections.observableArrayList();
-    ObservableList<String> contactNames = FXCollections.observableArrayList();
     ObservableList<Customer> customers = FXCollections.observableArrayList();
     ObservableList<String> customerNames = FXCollections.observableArrayList();
     ObservableList<User> users = FXCollections.observableArrayList();
@@ -71,7 +55,6 @@ public class AddAppointmentController {
 
         try {
                 User user = DBUser.getAUserByName(addAppointmentUserIDField.getValue());
-                Contact contact = DBContacts.getAContactByName(addAppointmentContactNameField.getValue());
                 Customer customer = DBCustomer.getACustomerByName(addAppointmentCustIDField.getValue());
                 String start = addApptStartTimeField.getText();
                 String end = addApptEndTimeField.getText();
@@ -98,8 +81,8 @@ public class AddAppointmentController {
                     DBAppointment.addAppointment(addAppointmentTitleField.getText(), addAppointmentDescField.getText(), addAppointmentLocationField.getText(),
                             addAppointmentTypeField.getText(), startTime, endTime,
                             user.getUserName(),
-                            sv.str(customer.getCustomer_ID()), sv.str(user.getUserID()),
-                            sv.str(contact.getContactID()));
+                            sv.str(customer.getCustomer_ID()), sv.str(user.getUserID()));
+
                     addApptErrorField.setTextFill(Color.BLACK);
                     addApptErrorField.setText("Appointment Created");
                     addApptBtn.setDisable(true);
@@ -222,17 +205,6 @@ public class AddAppointmentController {
         return result;
     }
 
-
-    /**
-     * Adds all the contact names to an Observable List of Strings and then sets the combo box with the values.
-     */
-    public void populateComboBoxContactName(){
-        for(Contact c : contacts){
-            contactNames.add(c.getContactName());
-        }
-        addAppointmentContactNameField.setItems(contactNames);
-    }
-
     /**
      *  Adds all the customer names to an Observable List of Strings and then sets the combo box with the values.
      */
@@ -263,10 +235,8 @@ public class AddAppointmentController {
      */
     public void initialize() {
         JDBC.openConnection();
-        contacts = DBContacts.getAllContacts();
         customers = DBCustomer.getAllCustomers();
         users = DBUser.getAllUsers();
-        populateComboBoxContactName();
         populateComboBoxCustomerNames();
         populateComboBoxUserNames();
     }

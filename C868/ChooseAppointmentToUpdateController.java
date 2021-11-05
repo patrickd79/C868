@@ -46,8 +46,6 @@ public class ChooseAppointmentToUpdateController {
     @FXML
     public TableColumn<Appointment, String> userIDCol;
     @FXML
-    public TableColumn<Appointment, String> contactIDCol;
-    @FXML
     public Label deleteAppointmentMessage;
     public static String apptID;
     public static String title;
@@ -77,7 +75,6 @@ public class ChooseAppointmentToUpdateController {
         lastUpdatedByCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdatedBy"));
         customerIDCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         userIDCol.setCellValueFactory(new PropertyValueFactory<>("userID"));
-        contactIDCol.setCellValueFactory(new PropertyValueFactory<>("contactID"));
         tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
 

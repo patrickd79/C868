@@ -81,7 +81,6 @@ public class ViewAppointmentsController {
         lastUpdatedByCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdatedBy"));
         customerIDCol.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         userIDCol.setCellValueFactory(new PropertyValueFactory<>("userID"));
-        contactIDCol.setCellValueFactory(new PropertyValueFactory<>("contactID"));
         tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
     /**
@@ -104,7 +103,6 @@ public class ViewAppointmentsController {
             lastUpdatedByCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdatedBy"));
             customerIDCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
             userIDCol.setCellValueFactory(new PropertyValueFactory<>("userID"));
-            contactIDCol.setCellValueFactory(new PropertyValueFactory<>("contactID"));
             tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
             viewApptErrorField.setTextFill(Color.BLACK);
             viewApptErrorField.setText("Showing appointments for the current month");
@@ -134,7 +132,6 @@ public class ViewAppointmentsController {
             lastUpdatedByCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdatedBy"));
             customerIDCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
             userIDCol.setCellValueFactory(new PropertyValueFactory<>("userID"));
-            contactIDCol.setCellValueFactory(new PropertyValueFactory<>("contactID"));
             tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
             viewApptErrorField.setTextFill(Color.BLACK);
             viewApptErrorField.setText("Showing appointments for the current week");

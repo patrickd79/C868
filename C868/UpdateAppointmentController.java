@@ -1,16 +1,19 @@
 package C868;
 
 import C868.Entities.Appointment;
-import C868.Entities.Contact;
 import C868.Entities.Customer;
 import C868.Entities.User;
-import C868.Helper.*;
+import C868.Helper.DBAppointment;
+import C868.Helper.DBCustomer;
+import C868.Helper.DBUser;
+import C868.Helper.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
+
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -65,8 +68,6 @@ public class UpdateAppointmentController {
     @FXML
     public Button updateBtn;
     Appointment appt;
-    ObservableList<Contact> contacts = FXCollections.observableArrayList();
-    ObservableList<String> contactNames = FXCollections.observableArrayList();
     ObservableList<String> contactIDs = FXCollections.observableArrayList();
     ObservableList<Customer> customers = FXCollections.observableArrayList();
     ObservableList<String> customerNames = FXCollections.observableArrayList();
@@ -98,9 +99,6 @@ public class UpdateAppointmentController {
         User user = DBUser.getAUserByName(userCombo.getValue());
         String userID = String.valueOf(user.getUserID());
         //String userID = String.valueOf(user.getUserID());
-        String contactName = contactCombo.getValue();
-        Contact contact = DBContacts.getAContactByName(contactName);
-        String contactID = String.valueOf(contact.getContactID());
         {
             try {
                 String adjustedStartTime;
@@ -126,7 +124,7 @@ public class UpdateAppointmentController {
                     System.out.println("update appt line 120");
                     //call DBCustomer update method
                     DBAppointment.updateAppointment(id, title, description, location, type, startDate,
-                            startTime, endDate, endTime, updatedBy, customerID, userID, contactID);
+                            startTime, endDate, endTime, updatedBy, customerID, userID);
                     updateApptErrorField.setTextFill(Color.BLACK);
                     updateApptErrorField.setText("Appointment Record Updated");
                     updateBtn.setDisable(true);
@@ -212,8 +210,6 @@ public class UpdateAppointmentController {
      */
     public void populateAppointmentData(){
 
-        String contactID = String.valueOf(appt.getContactID());
-        Contact contact = DBContacts.getAContactByID(contactID);
         int customerID = appt.getCustomerID();
         Customer customer = DBCustomer.getACustomerByID(customerID);
         int userID = appt.getUserID();
@@ -230,23 +226,11 @@ public class UpdateAppointmentController {
         createdByField.setText(appt.getCreatedBy());
         lastUpdateDateField.setText(getDateAndTimeNoSeconds(appt.getLastUpdate()));
         lastUpdatedByField.setText(appt.getLastUpdatedBy());
-        populateComboBoxContactName();
         populateComboBoxCustomerNames();
         populateComboBoxUserNames();
-        contactCombo.setValue(contact.getContactName());
         customerCombo.setValue(customer.getCustomer_Name());
         userCombo.setValue(user.getUserName());
 
-    }
-    /**
-     * Adds all the contact names to an Observable List of Strings and then sets the combo box with the values.
-     */
-    public void populateComboBoxContactName(){
-        for(Contact c : contacts){
-            contactNames.add(c.getContactName());
-            contactIDs.add(String.valueOf(c.getContactID()));
-        }
-        contactCombo.setItems(contactNames);
     }
     /**
      *  Adds all the customer names to an Observable List of Strings and then sets the combo box with the values.
@@ -273,7 +257,6 @@ public class UpdateAppointmentController {
         JDBC.openConnection();
         apptID = ChooseAppointmentToUpdateController.apptID;
         appt = DBAppointment.getAppointmentByID(apptID);
-        contacts = DBContacts.getAllContacts();
         customers = DBCustomer.getAllCustomers();
         users = DBUser.getAllUsers();
         populateAppointmentData();
