@@ -18,9 +18,6 @@ Launch the application, enter your username and password on the login screen, fo
 windows of the application you want to interact with. Every screen has a button to take you back to the Main Menu.
 To exit the application, simply exit via the 'x' on the top of the application window on any screen.
 
-Additional Report I included in part A3f:
-I added an input to enter a user ID and request the total number of appointments that the specified user has
-scheduled in the database, past and present.
 
 
 

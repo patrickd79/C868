@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="534.0" prefWidth="748.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="C868.MainMenuController">
+<AnchorPane prefHeight="638.0" prefWidth="1098.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="C868.MainMenuController">
    <children>
       <Button layoutX="65.0" layoutY="84.0" mnemonicParsing="false" onAction="#goToAddCustomerWindow" text="Add Customer" />
       <Button layoutX="385.0" layoutY="84.0" mnemonicParsing="false" onAction="#goToAddAppointmentWindow" text="Add Appointment" />
@@ -12,11 +12,12 @@
       <Button layoutX="65.0" layoutY="178.0" mnemonicParsing="false" onAction="#goToUpdateCustomerWindow" text="Update Customer" />
       <Button layoutX="385.0" layoutY="178.0" mnemonicParsing="false" onAction="#goToUpdateAppointmentWindow" text="Update Appointment" />
       <Button layoutX="388.0" layoutY="256.0" mnemonicParsing="false" onAction="#goToViewAppointmentWindow" text="View Appointments" />
-      <Button fx:id="addUserBtn" layoutX="397.0" layoutY="300.0" mnemonicParsing="false" onAction="#goToAddUserWindow" text="Add User" />
+      <Button fx:id="addUserBtn" layoutX="632.0" layoutY="84.0" mnemonicParsing="false" onAction="#goToAddUserWindow" text="Add User" />
       <Label fx:id="mainMenuMessages" layoutX="39.0" layoutY="353.0" prefHeight="141.0" prefWidth="643.0" text="Messages" wrapText="true">
          <font>
             <Font size="18.0" />
          </font></Label>
       <Button layoutX="65.0" layoutY="256.0" mnemonicParsing="false" onAction="#goToUpdateReportsWindow" text="Reports" />
+      <Button fx:id="updateUserBtn" layoutX="632.0" layoutY="171.0" mnemonicParsing="false" onAction="#goToUpdateUserWindow" text="Update User" />
    </children>
 </AnchorPane>

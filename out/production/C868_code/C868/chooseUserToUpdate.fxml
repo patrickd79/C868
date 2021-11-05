@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="596.0" prefWidth="1096.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="C868.ChooseUserToUpdateController">
+    <children>
+        <Label layoutX="324.0" layoutY="37.0" text="Choose a User To Update" />
+        <Button layoutX="703.0" layoutY="460.0" mnemonicParsing="false" onAction="#goToMainMenuWindow" text="Go To Main Menu" />
+
+        <Button layoutX="51.0" layoutY="459.0" mnemonicParsing="false" text="Update User" />
+        <TableView fx:id="tableView" layoutX="18.0" layoutY="86.0" prefHeight="253.0" prefWidth="1027.0">
+            <columns>
+                <TableColumn fx:id="userIDCol" prefWidth="55.0" text="ID" />
+                <TableColumn fx:id="userNameCol" prefWidth="197.0" text="Name" />
+                <TableColumn fx:id="passwordCol" prefWidth="159.0" text="Password" />
+                <TableColumn fx:id="createDateCol" prefWidth="150.0" text="Created" />
+                <TableColumn fx:id="createdByCol" prefWidth="147.0" text="Created By" />
+                <TableColumn fx:id="lastUpdateDateCol" prefWidth="166.0" text="Last Update" />
+                <TableColumn fx:id="lastUpdatedByCol" prefWidth="152.0" text="Last Update By" />
+
+            </columns>
+        </TableView>
+        <Button layoutX="294.0" layoutY="458.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="30.0" prefWidth="170.0" text="Delete User" textFill="#e10808" />
+        <Label fx:id="updateUserMessage" layoutX="387.0" layoutY="362.0" prefHeight="48.0" prefWidth="429.0" textFill="#e40e0e" />
+    </children>
+
+</AnchorPane>

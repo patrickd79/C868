@@ -14,6 +14,19 @@ import java.sql.SQLException;
  */
 public class DBUser {
 
+    public static void deleteUser(String id){
+        String sqlStmt = "DELETE FROM USERS WHERE User_ID = "+id+";";
+
+        try {
+            //prepare the sql stmt
+            PreparedStatement userPS = JDBC.getConnection().prepareStatement(sqlStmt);
+            //execute the sql command
+            userPS.execute();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
     public static void addUser(String userName, String password,String createdBy){
 
         String sqlStmt = "Insert into USERS(User_Name, Password, Create_Date, Created_By, Last_Update, " +

@@ -141,11 +141,17 @@ public class MainMenuController {
     }
 
     public void goToAddUserWindow(ActionEvent event) throws IOException {
+        //only the administrator has access to change user information
+        if(LoginController.thisUser.equals("admin")) {
         Parent addUserWindow = FXMLLoader.load(getClass().getResource("addUser.fxml"));
         Scene addUserScene = new Scene(addUserWindow);
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(addUserScene);
         window.show();
+        }else{
+            mainMenuMessages.setTextFill(Color.RED);
+            mainMenuMessages.setText("You do not have access to this feature. Please contact the administrator.");
+        }
     }
     /**
      * Changes window the Update Customer window.
@@ -158,6 +164,20 @@ public class MainMenuController {
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(updateCustomerScene);
         window.show();
+    }
+
+    public void goToUpdateUserWindow(ActionEvent event) throws IOException {
+        //only the administrator has access to change user information
+        if(LoginController.thisUser.equals("admin")) {
+            Parent updateUserWindow = FXMLLoader.load(getClass().getResource("chooseUserToUpdate.fxml"));
+            Scene updateUserScene = new Scene(updateUserWindow);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(updateUserScene);
+            window.show();
+        }else{
+            mainMenuMessages.setTextFill(Color.RED);
+            mainMenuMessages.setText("You do not have access to this feature. Please contact the administrator.");
+        }
     }
     /**
      * Changes window the Add Appointment window.

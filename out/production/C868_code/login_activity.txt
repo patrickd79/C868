@@ -58,3 +58,30 @@ Login Attempt  User: test, Result: Successful, Timestamp: 2021-11-05 16:27:41.60
 Login Attempt  User: user1, Result: Successful, Timestamp: 2021-11-05 16:28:01.703614 UTC
 
 
+Login Attempt  User: user1, Result: Unsuccessful, Timestamp: 2021-11-05 16:29:25.719322 UTC
+
+
+Login Attempt  User: user1, Result: Successful, Timestamp: 2021-11-05 16:29:51.387812 UTC
+
+
+Login Attempt  User: test, Result: Successful, Timestamp: 2021-11-05 16:45:45.781641 UTC
+
+
+Login Attempt  User: test, Result: Successful, Timestamp: 2021-11-05 17:06:57.940468 UTC
+
+
+Login Attempt  User: test, Result: Successful, Timestamp: 2021-11-05 17:09:43.961519 UTC
+
+
+Login Attempt  User: test, Result: Successful, Timestamp: 2021-11-05 17:14:08.130023 UTC
+
+
+Login Attempt  User: admin, Result: Successful, Timestamp: 2021-11-05 17:14:25.754374 UTC
+
+
+Login Attempt  User: test, Result: Successful, Timestamp: 2021-11-05 17:16:38.281528 UTC
+
+
+Login Attempt  User: admin, Result: Successful, Timestamp: 2021-11-05 17:16:56.546989 UTC
+
+
