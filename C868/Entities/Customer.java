@@ -14,7 +14,6 @@ public class Customer {
     private String createdBy;
     private String lastUpdate;
     private String lastUpdatedBy;
-    private int divisionID;//fk
 
     /**
      * This is the constructor method for the Customer object
@@ -27,9 +26,8 @@ public class Customer {
      * @param createdBy user who created the customer's record
      * @param lastUpdate date and time that customer's record was last updated in the database
      * @param lastUpdatedBy last user to update the customer's record
-     * @param divisionID the first level division ID for the customers country
      */
-    public Customer(int customer_ID, String customer_Name, String address, String postalCode, String phone, String createdDate, String createdBy, String lastUpdate, String lastUpdatedBy, int divisionID) {
+    public Customer(int customer_ID, String customer_Name, String address, String postalCode, String phone, String createdDate, String createdBy, String lastUpdate, String lastUpdatedBy) {
         this.customer_ID = customer_ID;
         this.customer_Name = customer_Name;
         this.address = address;
@@ -39,7 +37,6 @@ public class Customer {
         this.createdBy = createdBy;
         this.lastUpdate = lastUpdate;
         this.lastUpdatedBy = lastUpdatedBy;
-        this.divisionID = divisionID;
     }
 
     /**
@@ -176,19 +173,4 @@ public class Customer {
         this.lastUpdatedBy = lastUpdatedBy;
     }
 
-    /**
-     * Returns the first level division ID for the customer's address
-     * @return
-     */
-    public int getDivisionID() {
-        return divisionID;
-    }
-
-    /**
-     * Sets the first level division ID for the customer's address
-     * @param divisionID
-     */
-    public void setDivisionID(int divisionID) {
-        this.divisionID = divisionID;
-    }
 }

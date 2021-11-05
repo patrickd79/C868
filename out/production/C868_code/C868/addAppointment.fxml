@@ -19,7 +19,6 @@
       <Label layoutX="12.0" layoutY="330.0" prefHeight="42.0" prefWidth="359.0" />
       <Button layoutX="279.0" layoutY="378.0" mnemonicParsing="false" onAction="#goToMainMenuWindow" text="Go To Main Menu" />
       <Label fx:id="addApptErrorField" layoutX="386.0" layoutY="27.0" prefHeight="39.0" prefWidth="275.0" textFill="#d80c0c" />
-      <ComboBox fx:id="addAppointmentContactNameField" layoutX="312.0" layoutY="303.0" promptText="Contact Name" />
       <TextField fx:id="addApptStartTimeField" layoutX="601.0" layoutY="187.0" promptText="Start Time" />
       <TextField fx:id="addApptEndTimeField" layoutX="601.0" layoutY="304.0" promptText="End Time" />
       <Label layoutX="24.0" layoutY="75.0" text="Title" />

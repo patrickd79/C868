@@ -13,3 +13,39 @@ Login Attempt  User: test, Result: Successful, Timestamp: 2021-11-04 23:35:57.72
 Login Attempt  User: test, Result: Successful, Timestamp: 2021-11-04 23:39:28.218089 UTC
 
 
+Login Attempt  User: test, Result: Successful, Timestamp: 2021-11-05 00:10:37.801486 UTC
+
+
+Login Attempt  User: test, Result: Successful, Timestamp: 2021-11-05 00:15:27.968064 UTC
+
+
+Login Attempt  User: TEST, Result: Unsuccessful, Timestamp: 2021-11-05 14:24:38.294204 UTC
+
+
+Login Attempt  User: test, Result: Successful, Timestamp: 2021-11-05 14:24:44.949223 UTC
+
+
+Login Attempt  User: test, Result: Successful, Timestamp: 2021-11-05 14:28:14.846231 UTC
+
+
+Login Attempt  User: test, Result: Successful, Timestamp: 2021-11-05 14:38:48.4227 UTC
+
+
+Login Attempt  User: test, Result: Successful, Timestamp: 2021-11-05 14:42:00.08915 UTC
+
+
+Login Attempt  User: test, Result: Successful, Timestamp: 2021-11-05 14:50:07.100935 UTC
+
+
+Login Attempt  User: test, Result: Successful, Timestamp: 2021-11-05 14:56:36.037622 UTC
+
+
+Login Attempt  User: test, Result: Successful, Timestamp: 2021-11-05 15:00:05.915976 UTC
+
+
+Login Attempt  User: test, Result: Successful, Timestamp: 2021-11-05 15:01:49.94266 UTC
+
+
+Login Attempt  User: test, Result: Successful, Timestamp: 2021-11-05 15:03:12.003075 UTC
+
+

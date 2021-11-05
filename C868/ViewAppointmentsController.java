@@ -50,8 +50,7 @@ public class ViewAppointmentsController {
     public TableColumn<Appointment, String> customerIDCol;
     @FXML
     public TableColumn<Appointment, String> userIDCol;
-    @FXML
-    public TableColumn<Appointment, String> contactIDCol;
+
     public static String apptID;
     public static String title;
     public static Appointment thisAppt;

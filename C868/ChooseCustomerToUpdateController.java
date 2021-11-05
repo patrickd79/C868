@@ -77,6 +77,7 @@ public class ChooseCustomerToUpdateController {
         selectedCustomer = tableView.getSelectionModel().getSelectedItems();
         for(Customer customer: selectedCustomer){
             customerID = String.valueOf(customer.getCustomer_ID());
+            System.out.println("CUSTOMER ID choose = " + customerID);
             name = customer.getCustomer_Name();
         }
     }

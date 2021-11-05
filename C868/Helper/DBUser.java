@@ -13,6 +13,22 @@ import java.sql.SQLException;
  * @author patrickdenney
  */
 public class DBUser {
+
+    public static void addUser(String userName, String password,String createdBy){
+
+        String sqlStmt = "Insert into USERS(User_Name, Password, Create_Date, Created_By, Last_Update, " +
+                "Last_Updated_By)" +
+                "Values('"+userName+"', '"+password+"', '"+TimeZones.getUTCTime()+"', '"+createdBy+"', '"+TimeZones.getUTCTime()+
+                "', '"+createdBy+"');";
+        try {
+            //prepare the sql stmt
+            PreparedStatement customerPS = JDBC.getConnection().prepareStatement(sqlStmt);
+            //execute the sql command
+            customerPS.execute();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+    }
     /**
      *
      * @param name user name

@@ -24,7 +24,6 @@
             <TableColumn fx:id="lastUpdatedByCol" prefWidth="92.0" text="Last Update By" />
             <TableColumn fx:id="customerIDCol" prefWidth="65.0" text="Customer" />
             <TableColumn fx:id="userIDCol" prefWidth="37.0" text="User" />
-            <TableColumn fx:id="contactIDCol" prefWidth="55.0" text="Contact " />
         </columns>
       <columnResizePolicy>
          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

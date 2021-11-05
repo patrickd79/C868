@@ -25,10 +25,8 @@
     <DatePicker fx:id="updateAppointmentStartDate" layoutX="270.0" layoutY="119.0" promptText="Start" />
    <Label layoutX="794.0" layoutY="87.0" text="Customer" />
    <Label layoutX="794.0" layoutY="170.0" text="User" />
-   <Label layoutX="800.0" layoutY="269.0" text="Contact" />
    <ComboBox fx:id="customerCombo" layoutX="778.0" layoutY="120.0" prefWidth="150.0" promptText="Customer" />
    <ComboBox fx:id="userCombo" layoutX="782.0" layoutY="216.0" prefWidth="150.0" promptText="User" />
-   <ComboBox fx:id="contactCombo" layoutX="778.0" layoutY="307.0" prefWidth="150.0" promptText="Contact" />
    <TextField fx:id="startTimeField" layoutX="261.0" layoutY="194.0" promptText="HH:MM" />
    <TextField fx:id="endTimeField" layoutX="257.0" layoutY="293.0" promptText="HH:MM" />
    <Label layoutX="242.0" layoutY="161.0" text="Start Time HH:MM 24 Hr Time Only" />
