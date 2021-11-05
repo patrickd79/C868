@@ -18,18 +18,24 @@ public class DBUser {
 
         String sqlStmt = "UPDATE USERS " +
                 "SET" +
-                " User_Name = '"+name+"'," +
-                " Password = '"+password+"',"+
-                " Last_Update = '"+TimeZones.getUTCTime()+"'," +
-                " Last_Updated_By = '"+updatedBy+"'"+
-                " WHERE User_ID = "+id+";";
+                " User_Name = ?," +
+                " Password = ?,"+
+                " Last_Update = ?," +
+                " Last_Updated_By = ?"+
+                " WHERE User_ID = ?;";
 
         System.out.println(sqlStmt);
         try {
             //prepare the sql stmt
-            PreparedStatement customerPS = JDBC.getConnection().prepareStatement(sqlStmt);
+            PreparedStatement userPS = JDBC.getConnection().prepareStatement(sqlStmt);
+            //then insert value to prevent SQL injection attack
+            userPS.setString(1,name);
+            userPS.setString(2,password);
+            userPS.setString(3,TimeZones.getUTCTime());
+            userPS.setString(4,updatedBy);
+            userPS.setString(5,id);
             //execute the sql command
-            customerPS.execute();
+            userPS.execute();
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }
@@ -37,11 +43,13 @@ public class DBUser {
     }
 
     public static void deleteUser(String id){
-        String sqlStmt = "DELETE FROM USERS WHERE User_ID = "+id+";";
+        String sqlStmt = "DELETE FROM USERS WHERE User_ID = ?;";
 
         try {
             //prepare the sql stmt
             PreparedStatement userPS = JDBC.getConnection().prepareStatement(sqlStmt);
+            //then insert value to prevent SQL injection attack
+            userPS.setString(1,id);
             //execute the sql command
             userPS.execute();
         } catch (SQLException throwable) {
@@ -53,13 +61,20 @@ public class DBUser {
 
         String sqlStmt = "Insert into USERS(User_Name, Password, Create_Date, Created_By, Last_Update, " +
                 "Last_Updated_By)" +
-                "Values('"+userName+"', '"+password+"', '"+TimeZones.getUTCTime()+"', '"+createdBy+"', '"+TimeZones.getUTCTime()+
-                "', '"+createdBy+"');";
+                "Values(?,?,?,?,?,?);";
         try {
             //prepare the sql stmt
-            PreparedStatement customerPS = JDBC.getConnection().prepareStatement(sqlStmt);
+            PreparedStatement userPS = JDBC.getConnection().prepareStatement(sqlStmt);
+            //then insert value to prevent SQL injection attack
+            userPS.setString(1,userName);
+            userPS.setString(2,password);
+            userPS.setString(3,TimeZones.getUTCTime());
+            userPS.setString(4,createdBy);
+            userPS.setString(5,TimeZones.getUTCTime());
+            userPS.setString(6,createdBy);
+
             //execute the sql command
-            customerPS.execute();
+            userPS.execute();
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }
@@ -73,8 +88,10 @@ public class DBUser {
         User user = null;
         try{
             String sqlStmt = "SELECT User_ID, User_Name, Password, Create_Date, Created_By, Last_Update, Last_Updated_By " +
-                    "FROM USERS WHERE User_Name = '"+name+"';";
+                    "FROM USERS WHERE User_Name = ?;";
             PreparedStatement userPS = JDBC.getConnection().prepareStatement(sqlStmt);
+            //then insert value to prevent SQL injection attack
+            userPS.setString(1,name);
             ResultSet results = userPS.executeQuery();
             while(results.next()){
                 int userID = results.getInt("User_ID");
@@ -110,8 +127,10 @@ public class DBUser {
         User user = null;
         try{
             String sqlStmt = "SELECT User_ID, User_Name, Password, Create_Date, Created_By, Last_Update, Last_Updated_By " +
-                    "FROM USERS WHERE User_ID = "+id+";";
+                    "FROM USERS WHERE User_ID = ?;";
             PreparedStatement userPS = JDBC.getConnection().prepareStatement(sqlStmt);
+            //then insert value to prevent SQL injection attack
+            userPS.setInt(1,id);
             ResultSet results = userPS.executeQuery();
             while(results.next()){
                 int userID = results.getInt("User_ID");
