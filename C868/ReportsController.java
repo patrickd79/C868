@@ -10,9 +10,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -48,6 +53,22 @@ public class ReportsController {
         Main.mainScreen.goToMain(event);
     }
 
+    public void goToCustomerReportWindow(ActionEvent event) throws IOException {
+        Parent updateCustomerWindow = FXMLLoader.load(getClass().getResource("customerApptReport.fxml"));
+        Scene updateCustomerScene = new Scene(updateCustomerWindow);
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(updateCustomerScene);
+        window.show();
+    }
+
+    public void goToTypeReportWindow(ActionEvent event) throws IOException {
+        Parent updateCustomerWindow = FXMLLoader.load(getClass().getResource("typeReport.fxml"));
+        Scene updateCustomerScene = new Scene(updateCustomerWindow);
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(updateCustomerScene);
+        window.show();
+    }
+
 
 
     public void getCustomerAppts(ActionEvent event) {
@@ -55,6 +76,8 @@ public class ReportsController {
             String name = customersCombo.getValue();
             customer = DBCustomer.getACustomerByName(name);
             customerID = String.valueOf(customer.getCustomer_ID());
+            customersCombo.getItems().clear();
+            goToCustomerReportWindow(event);
         }
         catch (Exception ex){
             ex.printStackTrace();
@@ -68,6 +91,7 @@ public class ReportsController {
             String name = typesCombo.getValue();
             type = DBType.getATypeByName(name);
             typeID = type.getTypeID();
+            goToTypeReportWindow(event);
         }catch(Exception ex){
             ex.printStackTrace();
             reportErrorMsgField.setTextFill(Color.RED);

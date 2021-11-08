@@ -31,7 +31,6 @@ public class CustomerApptReportController {
     public TableColumn<Appointment, String> lastUpdateDateCol;
     public TableColumn<Appointment, String> lastUpdatedByCol;
     public TableColumn<Appointment, String> customerIDCol;
-    public TableColumn<Appointment, String> userIDCol;
 
     public void goToMainMenuWindow(ActionEvent event) throws IOException {
         Main.mainScreen.goToMain(event);
@@ -58,8 +57,7 @@ public class CustomerApptReportController {
         createdByCol.setCellValueFactory(new PropertyValueFactory<>("createdBy"));
         lastUpdateDateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
         lastUpdatedByCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdatedBy"));
-        customerIDCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
-        userIDCol.setCellValueFactory(new PropertyValueFactory<>("userID"));
+        customerIDCol.setCellValueFactory(new PropertyValueFactory<>("customerID"));
         tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
 

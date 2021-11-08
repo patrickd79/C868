@@ -15,7 +15,12 @@
          </font>
       </Label>
       <ComboBox fx:id="typesCombo" layoutX="25.0" layoutY="464.0" prefHeight="28.0" prefWidth="371.0" promptText="Types of appointments" />
-      <Label layoutX="43.0" layoutY="72.0" prefHeight="23.0" prefWidth="270.0" text="First Choose a Customer to Query">
+      <Label layoutX="28.0" layoutY="436.0" prefHeight="23.0" prefWidth="270.0" text="Choose a Type to Query">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="43.0" layoutY="72.0" prefHeight="23.0" prefWidth="270.0" text="Choose a Customer to Query">
          <font>
             <Font size="18.0" />
          </font>
@@ -24,6 +29,8 @@
 
       <Label fx:id="reportErrorMsgField" layoutX="289.0" layoutY="513.0" prefHeight="81.0" prefWidth="545.0" wrapText="true" />
       <Button fx:id="getCustomerBtn" layoutX="41.0" layoutY="134.0" mnemonicParsing="false" onAction="#getCustomerAppts" prefHeight="31.0" prefWidth="182.0" text="Retreive Customer Data" />
+      <Button fx:id="getTypesReportBtn" layoutX="24.0" layoutY="500.0" mnemonicParsing="false" onAction="#getApptByTypes" prefHeight="31.0" prefWidth="182.0" text="Retreive Type Data" />
+
       <Button layoutX="667.0" layoutY="604.0" mnemonicParsing="false" onAction="#goToMainMenuWindow" prefHeight="31.0" prefWidth="123.0" text="Go to Main Menu" />
       <ComboBox fx:id="customersCombo" layoutX="40.0" layoutY="100.0" prefHeight="27.0" prefWidth="213.0" promptText="Customers" />
    </children>

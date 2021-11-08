@@ -1,5 +1,7 @@
 package C868.Entities;
 
+import C868.Helper.DBCustomer;
+
 /**
  * This is the class to create Appointment objects.
  * @author Patrick Denney
@@ -22,6 +24,7 @@ public class Appointment {
     private int customerID;//fk
     private int userID;//fk
     private int contactID;//fk
+    private String customerName;
 
     /**
      * Constructor method for the Appointment Object
@@ -52,6 +55,7 @@ public class Appointment {
         this.lastUpdate = lastUpdate;
         this.lastUpdatedBy = lastUpdatedBy;
         this.customerID = customerID;
+        this.customerName = DBCustomer.getACustomerByID(customerID).getCustomer_Name();
         this.userID = userID;
     }
 
@@ -241,6 +245,8 @@ public class Appointment {
         this.customerID = customerID;
     }
 
+
+
     /**
      *
      * @return Returns the ID number of the user associated with the appointment.
@@ -257,21 +263,7 @@ public class Appointment {
         this.userID = userID;
     }
 
-    /**
-     *
-     * @return Returns the ID number of the contact associated with the appointment.
-     */
-    public int getContactID() {
-        return contactID;
-    }
 
-    /**
-     * Sets the ID number for the contact associated with the appointment.
-     * @param contactID
-     */
-    public void setContactID(int contactID) {
-        this.contactID = contactID;
-    }
 
 
 }
