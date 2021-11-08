@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
@@ -35,6 +36,8 @@ public class MainMenuController {
     public String userID;
     public static Paint color;
 
+    //Just finished adding parameterized SQL stmts to the DBUser and DBCustomer files need to now add error checking
+            //to the inputs (regex).
 
     public void initialize() {
         JDBC.openConnection();

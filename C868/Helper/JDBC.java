@@ -1,6 +1,7 @@
 package C868.Helper;
 
 import javafx.scene.control.Alert;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 
@@ -16,7 +17,11 @@ public abstract class JDBC {
     private static final String username = "sqlUser";
     private static final String password = "Passw0rd!";
     private static final String driver = "com.mysql.cj.jdbc.Driver";
+
+
+
     public static Connection connection;
+
 
     /**
      * Method to open the connection to the database

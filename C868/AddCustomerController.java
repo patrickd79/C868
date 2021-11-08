@@ -39,7 +39,7 @@ public class AddCustomerController {
             DBCustomer.addCustomer(custNameField.getText(), custAddressField.getText()+", "+
                     custCityField.getText(),
                     custPostalCodeField.getText(), custPhoneField.getText(),
-                    customerCreatedByField.getText());
+                    LoginController.thisUser);
             addCustErrorField.setTextFill(Color.BLACK);
             addCustErrorField.setText("Customer Record Created");
             addCustomerBtn.setDisable(true);
