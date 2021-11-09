@@ -1,6 +1,7 @@
 package C868.Entities;
 
 import C868.Helper.DBCustomer;
+import C868.Helper.DBType;
 
 /**
  * This is the class to create Appointment objects.
@@ -15,6 +16,7 @@ public class Appointment {
     private String description;
     private String location;
     private String type;
+    private String typeName;
     private String start;
     private String end;
     private String createdDate;
@@ -48,6 +50,7 @@ public class Appointment {
         this.description = description;
         this.location = location;
         this.type = type;
+        this.typeName = DBType.getATypeByID(type).getTypeName();
         this.start = start;
         this.end = end;
         this.createdDate = createdDate;
@@ -131,6 +134,14 @@ public class Appointment {
      */
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
 
     /**
@@ -243,6 +254,14 @@ public class Appointment {
      */
     public void setCustomerID(int customerID) {
         this.customerID = customerID;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(int customerID) {
+        this.customerName = DBCustomer.getACustomerByID(customerID).getCustomer_Name();
     }
 
 

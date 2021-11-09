@@ -50,6 +50,8 @@ public class ReportsController {
     }
 
     public void goToMainMenuWindow(ActionEvent event) throws IOException {
+        customersCombo.getItems().clear();
+        typesCombo.getItems().clear();
         Main.mainScreen.goToMain(event);
     }
 
@@ -76,6 +78,7 @@ public class ReportsController {
             String name = customersCombo.getValue();
             customer = DBCustomer.getACustomerByName(name);
             customerID = String.valueOf(customer.getCustomer_ID());
+            typesCombo.getItems().clear();
             customersCombo.getItems().clear();
             goToCustomerReportWindow(event);
         }
@@ -91,6 +94,8 @@ public class ReportsController {
             String name = typesCombo.getValue();
             type = DBType.getATypeByName(name);
             typeID = type.getTypeID();
+            typesCombo.getItems().clear();
+            customersCombo.getItems().clear();
             goToTypeReportWindow(event);
         }catch(Exception ex){
             ex.printStackTrace();

@@ -24,9 +24,7 @@
    <Label layoutX="554.0" layoutY="173.0" text="Last Updated By" />
     <DatePicker fx:id="updateAppointmentStartDate" layoutX="270.0" layoutY="119.0" promptText="Start" />
    <Label layoutX="794.0" layoutY="87.0" text="Customer" />
-   <Label layoutX="794.0" layoutY="170.0" text="User" />
    <ComboBox fx:id="customerCombo" layoutX="778.0" layoutY="120.0" prefWidth="150.0" promptText="Customer" />
-   <ComboBox fx:id="userCombo" layoutX="782.0" layoutY="216.0" prefWidth="150.0" promptText="User" />
    <TextField fx:id="startTimeField" layoutX="261.0" layoutY="194.0" promptText="HH:MM" />
    <TextField fx:id="endTimeField" layoutX="257.0" layoutY="293.0" promptText="HH:MM" />
    <Label layoutX="242.0" layoutY="161.0" text="Start Time HH:MM 24 Hr Time Only" />
@@ -34,13 +32,11 @@
    <TextField fx:id="titleField" layoutX="40.0" layoutY="194.0" promptText="Title" />
    <TextField fx:id="descriptionField" layoutX="34.0" layoutY="294.0" promptText="Description" />
    <TextField fx:id="locationField" layoutX="34.0" layoutY="382.0" promptText="Location" />
-   <TextField fx:id="typeField" layoutX="22.0" layoutY="468.0" promptText="Type" />
+   <ComboBox fx:id="typeCombo" layoutX="22.0" layoutY="468.0" promptText="Type" />
    <TextField fx:id="createDateField" editable="false" layoutX="256.0" layoutY="395.0" promptText="Created Date" />
    <TextField fx:id="createdByField" editable="false" layoutX="275.0" layoutY="474.0" promptText="Created By" />
    <TextField fx:id="lastUpdateDateField" editable="false" layoutX="563.0" layoutY="121.0" promptText="Last Update Date" />
    <TextField fx:id="lastUpdatedByField" editable="false" layoutX="543.0" layoutY="217.0" promptText="Last Updated By" />
    <Label fx:id="updateApptErrorField" layoutX="522.0" layoutY="487.0" prefHeight="114.0" prefWidth="434.0" wrapText="true" />
    <Label layoutX="68.0" layoutY="61.0" text="Appointment ID" />
-   <Label layoutX="531.0" layoutY="297.0" text="Person Updating Record" />
-   <TextField fx:id="updatingNowField" layoutX="522.0" layoutY="334.0" promptText="Person Updating" />
 </AnchorPane>

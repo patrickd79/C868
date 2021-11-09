@@ -2,6 +2,7 @@ package C868;
 
 import C868.Entities.Appointment;
 import C868.Entities.Customer;
+import C868.Entities.Type;
 import C868.Entities.User;
 import C868.Helper.*;
 import javafx.collections.FXCollections;
@@ -22,7 +23,7 @@ public class AddAppointmentController {
     @FXML
     public TextField addAppointmentLocationField;
     @FXML
-    public TextField addAppointmentTypeField;
+    public ComboBox<String> typeCombo;
     @FXML
     public DatePicker addAppointmentStartDate;
     @FXML
@@ -39,8 +40,10 @@ public class AddAppointmentController {
     public Button addApptBtn;
     ObservableList<Customer> customers = FXCollections.observableArrayList();
     ObservableList<String> customerNames = FXCollections.observableArrayList();
-    ObservableList<User> users = FXCollections.observableArrayList();
-    ObservableList<String> userNames = FXCollections.observableArrayList();
+    ObservableList<Type> types = FXCollections.observableArrayList();
+    ObservableList<String> typeNames = FXCollections.observableArrayList();
+    //ObservableList<User> users = FXCollections.observableArrayList();
+    //ObservableList<String> userNames = FXCollections.observableArrayList();
     /**
      * Lambda to convert an integer to a String. It is useful for
      * reducing clutter in some of the methods where String.valueOf() is used frequently
@@ -76,11 +79,12 @@ public class AddAppointmentController {
                 //System.out.println("Start: "+adjustedStartTime+" End: "+adjustedEndTime);
                 String startTime = addAppointmentStartDate.getValue().toString() + " "+ start;
                 String endTime = addAppointmentStartDate.getValue().toString() + " " +end;
+                String typeID = String.valueOf(DBType.getATypeByName(typeCombo.getValue()).getTypeID());
                 if(isDuringOfficeHours(startTime, endTime) &&
                         !customerHasOverlappingAppointments(sv.str(customer.getCustomer_ID()),startTime, endTime,"0")){
                     DBAppointment.addAppointment(addAppointmentTitleField.getText(), addAppointmentDescField.getText(), addAppointmentLocationField.getText(),
-                            addAppointmentTypeField.getText(), startTime, endTime,
-                            user.getUserName(),
+                            typeID, startTime, endTime,
+                            LoginController.thisUser,
                             sv.str(customer.getCustomer_ID()), sv.str(user.getUserID()));
 
                     addApptErrorField.setTextFill(Color.BLACK);
@@ -215,15 +219,20 @@ public class AddAppointmentController {
         addAppointmentCustIDField.setItems(customerNames);
     }
 
-    /**
-     * Adds all the user names to an Observable List of Strings and then sets the combo box with the values.
-     */
-    public void populateComboBoxUserNames(){
+
+    public void populateComboBoxTypeNames(){
+        for(Type t : types){
+            typeNames.add(t.getTypeName());
+        }
+        typeCombo.setItems(typeNames);
+    }
+
+    /*public void populateComboBoxUserNames(){
         for(User u : users){
             userNames.add(u.getUserName());
         }
         addAppointmentUserIDField.setItems(userNames);
-    }
+    }*/
 
     public void goToMainMenuWindow(ActionEvent event) throws IOException {
         Main.mainScreen.goToMain(event);
@@ -236,8 +245,10 @@ public class AddAppointmentController {
     public void initialize() {
         JDBC.openConnection();
         customers = DBCustomer.getAllCustomers();
-        users = DBUser.getAllUsers();
+        types = DBType.getAllTypes();
+        //users = DBUser.getAllUsers();
         populateComboBoxCustomerNames();
-        populateComboBoxUserNames();
+        populateComboBoxTypeNames();
+        //populateComboBoxUserNames();
     }
 }

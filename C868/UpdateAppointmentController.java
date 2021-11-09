@@ -2,11 +2,9 @@ package C868;
 
 import C868.Entities.Appointment;
 import C868.Entities.Customer;
+import C868.Entities.Type;
 import C868.Entities.User;
-import C868.Helper.DBAppointment;
-import C868.Helper.DBCustomer;
-import C868.Helper.DBUser;
-import C868.Helper.JDBC;
+import C868.Helper.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,16 +28,13 @@ public class UpdateAppointmentController {
     public TextField startTimeField;
     @FXML
     public TextField endTimeField;
-    @FXML
-    public ComboBox<String> contactCombo;
+
     @FXML
     public TextField titleField;
     @FXML
     public TextField descriptionField;
     @FXML
     public TextField locationField;
-    @FXML
-    public TextField typeField;
     @FXML
     public TextField createDateField;
     @FXML
@@ -52,29 +47,19 @@ public class UpdateAppointmentController {
     public Label updateApptErrorField;
     @FXML
     public TextField updatingNowField;
-    @FXML
-    public ToggleGroup startToggle;
-    @FXML
-    public ToggleGroup endToggle;
-    @FXML
-    public RadioButton startAMToggle;
-    @FXML
-    public RadioButton startPMToggle;
-    @FXML
-    public RadioButton endAMToggle;
-    @FXML
-    public RadioButton endPMToggle;
     private static String apptID;
     @FXML
     public Button updateBtn;
+    public ComboBox<String> typeCombo;
     Appointment appt;
-    ObservableList<String> contactIDs = FXCollections.observableArrayList();
     ObservableList<Customer> customers = FXCollections.observableArrayList();
     ObservableList<String> customerNames = FXCollections.observableArrayList();
     ObservableList<String> customerIDs = FXCollections.observableArrayList();
     ObservableList<User> users = FXCollections.observableArrayList();
     ObservableList<String> userNames = FXCollections.observableArrayList();
     ObservableList<String> userIDs = FXCollections.observableArrayList();
+    ObservableList<Type> types = FXCollections.observableArrayList();
+    ObservableList<String> typeNames = FXCollections.observableArrayList();
 
     /**
      * Updates the selected appointment record with the data provided.
@@ -82,16 +67,18 @@ public class UpdateAppointmentController {
      * @throws IOException
      */
     public void updateAppointment(ActionEvent event) throws IOException {
+
         String id = apptID;
         String title = titleField.getText();
         String description = descriptionField.getText();
         String location = locationField.getText();
-        String type = typeField.getText();
+        String typeName = typeCombo.getValue();
+        String typeID = DBType.getATypeByName(typeName).getTypeID();
         String startDate = String.valueOf(updateAppointmentStartDate.getValue());
         String startTime = startTimeField.getText();
         String endDate = String.valueOf(updateAppointmentStartDate.getValue());
         String endTime = endTimeField.getText();
-        String updatedBy = updatingNowField.getText();
+        String updatedBy = LoginController.thisUser;
         Customer customer = DBCustomer.getACustomerByName(customerCombo.getValue());
         String customerID = String.valueOf(customer.getCustomer_ID());
         //User user = DBUser.getAUserByName(userCombo.getValue());
@@ -123,7 +110,7 @@ public class UpdateAppointmentController {
                         !AddAppointmentController.customerHasOverlappingAppointments(String.valueOf(customer.getCustomer_ID()),startDateAndTime, endDateAndTime, apptID)) {
                     System.out.println("update appt line 120");
                     //call DBCustomer update method
-                    DBAppointment.updateAppointment(id, title, description, location, type, startDate,
+                    DBAppointment.updateAppointment(id, title, description, location, typeID, startDate,
                             startTime, endDate, endTime, updatedBy, customerID, userID);
                     updateApptErrorField.setTextFill(Color.BLACK);
                     updateApptErrorField.setText("Appointment Record Updated");
@@ -218,7 +205,6 @@ public class UpdateAppointmentController {
         titleField.setText(appt.getTitle());
         descriptionField.setText(appt.getDescription());
         locationField.setText(appt.getLocation());
-        typeField.setText(appt.getType());
         updateAppointmentStartDate.setValue(LocalDate.parse(getDateNoTime(appt.getStart())));
         startTimeField.setText(getTime(appt.getStart()));
         endTimeField.setText(getTime(appt.getEnd()));
@@ -227,7 +213,9 @@ public class UpdateAppointmentController {
         lastUpdateDateField.setText(getDateAndTimeNoSeconds(appt.getLastUpdate()));
         lastUpdatedByField.setText(appt.getLastUpdatedBy());
         populateComboBoxCustomerNames();
-        populateComboBoxUserNames();
+        //populateComboBoxUserNames();
+        populateComboBoxTypeNames();
+        typeCombo.setValue(DBType.getATypeByID(appt.getType()).getTypeName());
         customerCombo.setValue(customer.getCustomer_Name());
         userCombo.setValue(user.getUserName());
 
@@ -245,12 +233,19 @@ public class UpdateAppointmentController {
     /**
      * Adds all the user names to an Observable List of Strings and then sets the combo box with the values.
      */
-    public void populateComboBoxUserNames(){
+    /*public void populateComboBoxUserNames(){
         for(User u : users){
             userNames.add(u.getUserName());
             userIDs.add(String.valueOf(u.getUserID()));
         }
         userCombo.setItems(userNames);
+    }*/
+
+    public void populateComboBoxTypeNames(){
+        for(Type t : types){
+            typeNames.add(t.getTypeName());
+        }
+        typeCombo.setItems(typeNames);
     }
 
     public void initialize() {
@@ -258,7 +253,7 @@ public class UpdateAppointmentController {
         apptID = ChooseAppointmentToUpdateController.apptID;
         appt = DBAppointment.getAppointmentByID(apptID);
         customers = DBCustomer.getAllCustomers();
-        users = DBUser.getAllUsers();
+        types = DBType.getAllTypes();
         populateAppointmentData();
 
     }

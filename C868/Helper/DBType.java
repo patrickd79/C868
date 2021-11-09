@@ -88,6 +88,30 @@ public class DBType {
         }
         return type;
     }
+    public static Type getATypeByID(String id){
+        Type type = null;
+        try{
+            String sqlStmt = "SELECT TypeID, Appointment_Type, Length_of_Appointment_in_Minutes, Instrument"+
+                    " FROM TYPES_OF_APPOINTMENTS WHERE TypeID = ?;";
+            PreparedStatement typePS = JDBC.getConnection().prepareStatement(sqlStmt);
+            //then insert value to prevent SQL injection attack
+            typePS.setString(1,id);
+            ResultSet results = typePS.executeQuery();
+            while(results.next()){
+                int typeID = results.getInt("TypeID");
+                String typeName = results.getString("Appointment_Type");
+                String length = results.getString("Length_of_Appointment_in_Minutes");
+                String instrument = results.getString("Instrument");
+
+                type = new Type(String.valueOf(typeID),typeName,length,instrument);
+            }
+        }
+        catch(SQLException throwable){
+            System.out.println("problem getting type");
+            throwable.printStackTrace();
+        }
+        return type;
+    }
 
     public static ObservableList<Type> getAllTypes(){
         ObservableList<Type> types = FXCollections.observableArrayList();
