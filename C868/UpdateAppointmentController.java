@@ -32,8 +32,6 @@ public class UpdateAppointmentController {
     @FXML
     public TextField titleField;
     @FXML
-    public TextField descriptionField;
-    @FXML
     public TextField locationField;
     @FXML
     public TextField createDateField;
@@ -70,7 +68,6 @@ public class UpdateAppointmentController {
 
         String id = apptID;
         String title = titleField.getText();
-        String description = descriptionField.getText();
         String location = locationField.getText();
         String typeName = typeCombo.getValue();
         String typeID = DBType.getATypeByName(typeName).getTypeID();
@@ -110,7 +107,7 @@ public class UpdateAppointmentController {
                         !AddAppointmentController.customerHasOverlappingAppointments(String.valueOf(customer.getCustomer_ID()),startDateAndTime, endDateAndTime, apptID)) {
                     System.out.println("update appt line 120");
                     //call DBCustomer update method
-                    DBAppointment.updateAppointment(id, title, description, location, typeID, startDate,
+                    DBAppointment.updateAppointment(id, title, location, typeID, startDate,
                             startTime, endDate, endTime, updatedBy, customerID, userID);
                     updateApptErrorField.setTextFill(Color.BLACK);
                     updateApptErrorField.setText("Appointment Record Updated");
@@ -199,11 +196,8 @@ public class UpdateAppointmentController {
 
         int customerID = appt.getCustomerID();
         Customer customer = DBCustomer.getACustomerByID(customerID);
-        int userID = appt.getUserID();
-        User user = DBUser.getAUserByID(userID);
         apptIDLabel.setText(String.valueOf(appt.getAppointmentID()));
         titleField.setText(appt.getTitle());
-        descriptionField.setText(appt.getDescription());
         locationField.setText(appt.getLocation());
         updateAppointmentStartDate.setValue(LocalDate.parse(getDateNoTime(appt.getStart())));
         startTimeField.setText(getTime(appt.getStart()));
@@ -217,7 +211,6 @@ public class UpdateAppointmentController {
         populateComboBoxTypeNames();
         typeCombo.setValue(DBType.getATypeByID(appt.getType()).getTypeName());
         customerCombo.setValue(customer.getCustomer_Name());
-        userCombo.setValue(user.getUserName());
 
     }
     /**

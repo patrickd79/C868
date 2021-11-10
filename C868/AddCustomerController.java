@@ -36,8 +36,7 @@ public class AddCustomerController {
      */
     public void addCustomer(ActionEvent event){
         try {
-            DBCustomer.addCustomer(custNameField.getText(), custAddressField.getText()+", "+
-                    custCityField.getText(),
+            DBCustomer.addCustomer(custNameField.getText(), custAddressField.getText(),
                     custPostalCodeField.getText(), custPhoneField.getText(),
                     LoginController.thisUser);
             addCustErrorField.setTextFill(Color.BLACK);
@@ -49,6 +48,10 @@ public class AddCustomerController {
             addCustErrorField.setText("Please complete all fields");
             exception.printStackTrace();
         }
+    }
+
+    public static void checkInputs(){
+
     }
 
 

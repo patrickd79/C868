@@ -19,8 +19,6 @@ public class AddAppointmentController {
     @FXML
     public TextField addAppointmentTitleField;
     @FXML
-    public TextField addAppointmentDescField;
-    @FXML
     public TextField addAppointmentLocationField;
     @FXML
     public ComboBox<String> typeCombo;
@@ -82,7 +80,7 @@ public class AddAppointmentController {
                 String typeID = String.valueOf(DBType.getATypeByName(typeCombo.getValue()).getTypeID());
                 if(isDuringOfficeHours(startTime, endTime) &&
                         !customerHasOverlappingAppointments(sv.str(customer.getCustomer_ID()),startTime, endTime,"0")){
-                    DBAppointment.addAppointment(addAppointmentTitleField.getText(), addAppointmentDescField.getText(), addAppointmentLocationField.getText(),
+                    DBAppointment.addAppointment(addAppointmentTitleField.getText(), addAppointmentLocationField.getText(),
                             typeID, startTime, endTime,
                             LoginController.thisUser,
                             sv.str(customer.getCustomer_ID()), sv.str(user.getUserID()));

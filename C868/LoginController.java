@@ -138,7 +138,8 @@ public class LoginController implements Initializable {
         thisUserID = String.valueOf(user.getUserID());
         validPassword = user.getPassword();
         if(user.isAdmin()){
-            user = new AdminUser();
+            user = new AdminUser(user.getUserID(),user.getUserName(),user.getPassword(),
+                     user.getCreatedDate(),  user.getCreatedBy(),  user.getLastUpdate(),  user.getLastUpdatedBy(),  true);
         }
     }
 

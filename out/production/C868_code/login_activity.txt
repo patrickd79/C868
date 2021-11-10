@@ -238,3 +238,27 @@ Login Attempt  User: admin, Result: Successful, Timestamp: 2021-11-10 14:57:56.0
 Login Attempt  User: newadmin, Result: Successful, Timestamp: 2021-11-10 14:58:16.691789 UTC
 
 
+Login Attempt  User: owner, Result: Successful, Timestamp: 2021-11-10 14:59:20.458241 UTC
+
+
+Login Attempt  User: admin, Result: Successful, Timestamp: 2021-11-10 15:07:22.639171 UTC
+
+
+Login Attempt  User: newadmin, Result: Successful, Timestamp: 2021-11-10 15:07:52.651861 UTC
+
+
+Login Attempt  User: newadmin, Result: Successful, Timestamp: 2021-11-10 15:11:23.635507 UTC
+
+
+Login Attempt  User: admin, Result: Successful, Timestamp: 2021-11-10 18:39:29.768824 UTC
+
+
+Login Attempt  User: admin, Result: Successful, Timestamp: 2021-11-10 19:53:46.96294 UTC
+
+
+Login Attempt  User: admin, Result: Successful, Timestamp: 2021-11-10 19:58:28.93056 UTC
+
+
+Login Attempt  User: admin, Result: Successful, Timestamp: 2021-11-10 20:24:49.027656 UTC
+
+

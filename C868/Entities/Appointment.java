@@ -13,7 +13,7 @@ public class Appointment {
 
     private final int appointmentID;
     private String title;
-    private String description;
+
     private String location;
     private String type;
     private String typeName;
@@ -32,7 +32,6 @@ public class Appointment {
      * Constructor method for the Appointment Object
      * @param appointmentID This is the auto-generated ID number for the individual appointment.
      * @param title This is the Title given to the appointment.
-     * @param description This is a short description of the purpose of the appointment.
      * @param location This is the location of the appointment.
      * @param type This is the type of appointment to be held.
      * @param start The start date and time of the appointment.
@@ -44,10 +43,9 @@ public class Appointment {
      * @param customerID ID number of the customer associated with the appointment.
      * @param userID ID number of the user associated with the appointment.
      */
-    public Appointment(int appointmentID, String title, String description, String location, String type, String start, String end, String createdDate, String createdBy, String lastUpdate, String lastUpdatedBy, int customerID, int userID) {
+    public Appointment(int appointmentID, String title, String location, String type, String start, String end, String createdDate, String createdBy, String lastUpdate, String lastUpdatedBy, int customerID, int userID) {
         this.appointmentID = appointmentID;
         this.title = title;
-        this.description = description;
         this.location = location;
         this.type = type;
         this.typeName = DBType.getATypeByID(type).getTypeName();
@@ -86,22 +84,6 @@ public class Appointment {
      */
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    /**
-     *
-     * @return Returns the description of the appointment.
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * Sets the description of the appointment
-     * @param description
-     */
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     /**

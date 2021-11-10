@@ -21,7 +21,7 @@ public class DBUser {
                 " User_Name = ?," +
                 " Password = ?,"+
                 " Last_Update = ?," +
-                " Last_Updated_By = ?"+
+                " Last_Updated_By = ?,"+
                 " AdminUser = ?"+
                 " WHERE User_ID = ?;";
 

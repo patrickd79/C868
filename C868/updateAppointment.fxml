@@ -14,7 +14,6 @@
    <Label layoutX="590.0" layoutY="27.0" text="Update Appointment" />
    <Label fx:id="apptIDLabel" layoutX="68.0" layoutY="85.0" text="Appointment ID" />
    <Label layoutX="70.0" layoutY="164.0" text="Title" />
-   <Label layoutX="68.0" layoutY="261.0" text="Description" />
    <Label layoutX="68.0" layoutY="346.0" text="Location" />
    <Label layoutX="69.0" layoutY="432.0" text="Type" />
    <Label layoutX="304.0" layoutY="78.0" text="Start" />
@@ -30,7 +29,6 @@
    <Label layoutX="242.0" layoutY="161.0" text="Start Time HH:MM 24 Hr Time Only" />
    <Label layoutX="245.0" layoutY="270.0" text="End Time HH:MM 24 Hr Time Only" />
    <TextField fx:id="titleField" layoutX="40.0" layoutY="194.0" promptText="Title" />
-   <TextField fx:id="descriptionField" layoutX="34.0" layoutY="294.0" promptText="Description" />
    <TextField fx:id="locationField" layoutX="34.0" layoutY="382.0" promptText="Location" />
    <ComboBox fx:id="typeCombo" layoutX="22.0" layoutY="468.0" promptText="Type" />
    <TextField fx:id="createDateField" editable="false" layoutX="256.0" layoutY="395.0" promptText="Created Date" />

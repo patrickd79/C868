@@ -65,7 +65,6 @@ public class ChooseCustomerToUpdateController {
         createdByCol.setCellValueFactory(new PropertyValueFactory<>("createdBy"));
         lastUpdateDateCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
         lastUpdatedByCol.setCellValueFactory(new PropertyValueFactory<>("lastUpdatedBy"));
-        divIDCol.setCellValueFactory(new PropertyValueFactory<>("divisionID"));
         tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
 

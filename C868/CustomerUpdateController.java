@@ -49,8 +49,8 @@ public class CustomerUpdateController {
         String address = updateCustAddressField.getText();
         String postalCode = updateCustPostalCodeField.getText();
         String phone = updateCustPhoneField.getText();
-        String updatedBy = currentPersonCustomerUpdatedByField.getText();
-        if(!updatedBy.isEmpty() && !name.isEmpty() && !address.isEmpty() && !postalCode.isEmpty() && !phone.isEmpty() && !updatedBy.isEmpty()) {
+        String updatedBy = LoginController.user.getUserName();
+        if(!updatedBy.isEmpty() && !name.isEmpty() && !address.isEmpty() && !postalCode.isEmpty() && !phone.isEmpty()) {
             try {
                 //call DBCustomer update method
                 DBCustomer.updateCustomer(customerID, name, address, postalCode, phone, updatedBy);
@@ -84,6 +84,7 @@ public class CustomerUpdateController {
         updateCustCreatedOn.setText(customer.getCreatedDate());
         updateCustLastUpdatedBy.setText(customer.getLastUpdatedBy());
         updateCustLastUpdateDate.setText(customer.getLastUpdate());
+
 
     }
 

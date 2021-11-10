@@ -88,7 +88,7 @@ public class DBAppointment {
     public static ObservableList<Appointment> getAppointmentsForASingleCustomerByID(String id){
         Appointment appt;
         ObservableList<Appointment> appts = FXCollections.observableArrayList();
-        String sqlStmt = "SELECT Appointment_ID, Title, Description, Location, Type, Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID FROM APPOINTMENTS WHERE Customer_ID= ?;";
+        String sqlStmt = "SELECT Appointment_ID, Title, Location, Type, Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID FROM APPOINTMENTS WHERE Customer_ID= ?;";
         try {
             //prepare the sql stmt
             PreparedStatement customerAppointPS = JDBC.getConnection().prepareStatement(sqlStmt);
@@ -100,7 +100,6 @@ public class DBAppointment {
             while(results.next()) {
                 int apptID = results.getInt("Appointment_ID");
                 String title = results.getString("Title");
-                String description = results.getString("Description");
                 String location = results.getString("Location");
                 String type = results.getString("Type");
                 String start = results.getString("Start");
@@ -115,7 +114,7 @@ public class DBAppointment {
                 String localEnd = TimeZones.convertToCurrentTimeZone(end);
                 String createDateLocal = TimeZones.convertToCurrentTimeZone(createDate);
                 String updateDateLocal = TimeZones.convertToCurrentTimeZone(lastUpdate);
-                appt = new Appointment(apptID, title, description, location, type, localStart, localEnd, createDateLocal, createdBy, updateDateLocal, lastUpdatedBy, custID, userID);
+                appt = new Appointment(apptID, title, location, type, localStart, localEnd, createDateLocal, createdBy, updateDateLocal, lastUpdatedBy, custID, userID);
                 appts.add(appt);
             }
         } catch (SQLException throwable) {
@@ -127,7 +126,7 @@ public class DBAppointment {
     public static ObservableList<Appointment> getAppointmentsByTypeID(String id){
         Appointment appt;
         ObservableList<Appointment> appts = FXCollections.observableArrayList();
-        String sqlStmt = "SELECT Appointment_ID, Title, Description, Location, Type, Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID FROM APPOINTMENTS WHERE Type= ?;";
+        String sqlStmt = "SELECT Appointment_ID, Title, Location, Type, Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID FROM APPOINTMENTS WHERE Type= ?;";
         try {
             //prepare the sql stmt
             PreparedStatement typeAppointPS = JDBC.getConnection().prepareStatement(sqlStmt);
@@ -139,7 +138,6 @@ public class DBAppointment {
             while(results.next()) {
                 int apptID = results.getInt("Appointment_ID");
                 String title = results.getString("Title");
-                String description = results.getString("Description");
                 String location = results.getString("Location");
                 String type = results.getString("Type");
                 String start = results.getString("Start");
@@ -154,7 +152,7 @@ public class DBAppointment {
                 String localEnd = TimeZones.convertToCurrentTimeZone(end);
                 String createDateLocal = TimeZones.convertToCurrentTimeZone(createDate);
                 String updateDateLocal = TimeZones.convertToCurrentTimeZone(lastUpdate);
-                appt = new Appointment(apptID, title, description, location, type, localStart, localEnd, createDateLocal, createdBy, updateDateLocal, lastUpdatedBy, custID, userID);
+                appt = new Appointment(apptID, title, location, type, localStart, localEnd, createDateLocal, createdBy, updateDateLocal, lastUpdatedBy, custID, userID);
                 appts.add(appt);
             }
         } catch (SQLException throwable) {
@@ -171,7 +169,7 @@ public class DBAppointment {
     public static ObservableList<Appointment> getAppointmentsForASingleUserByID(String id){
         Appointment appt;
         ObservableList<Appointment> appts = FXCollections.observableArrayList();
-        String sqlStmt = "SELECT Appointment_ID, Title, Description, Location, Type, Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID FROM APPOINTMENTS WHERE User_ID= ?;";
+        String sqlStmt = "SELECT Appointment_ID, Title, Location, Type, Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID FROM APPOINTMENTS WHERE User_ID= ?;";
         //System.out.println("Get User SQL stmt: "+sqlStmt);
         try {
             //prepare the sql stmt
@@ -184,7 +182,6 @@ public class DBAppointment {
             while(results.next()){
                 int apptID = results.getInt("Appointment_ID");
                 String title = results.getString("Title");
-                String description = results.getString("Description");
                 String location = results.getString("Location");
                 String type = results.getString("Type");
                 String start = results.getString("Start");
@@ -199,7 +196,7 @@ public class DBAppointment {
                 String localEnd = TimeZones.convertToCurrentTimeZone(end);
                 String createDateLocal = TimeZones.convertToCurrentTimeZone(createDate);
                 String updateDateLocal = TimeZones.convertToCurrentTimeZone(lastUpdate);
-                appt = new Appointment(apptID,title,description,location,type,localStart,localEnd,createDateLocal,createdBy,updateDateLocal,lastUpdatedBy,custID,userID);
+                appt = new Appointment(apptID,title,location,type,localStart,localEnd,createDateLocal,createdBy,updateDateLocal,lastUpdatedBy,custID,userID);
                 appts.add(appt);
             }
         } catch (SQLException throwable) {
@@ -220,7 +217,7 @@ public class DBAppointment {
      * @param customerId customer associated with the appointment
      * @param userId user associated with the appointment
      */
-    public static void addAppointment(String title,String description,String location,String type,
+    public static void addAppointment(String title,String location,String type,
                                       String start, String end, String createdBy, String customerId,
                                       String userId){
 
@@ -228,25 +225,24 @@ public class DBAppointment {
         java.sql.Timestamp sqlDate = new java.sql.Timestamp(date.getTime());
         String create_date = sqlDate.toString();
 
-        String sqlStmt = "INSERT into APPOINTMENTS(Title, Description, Location, Type, Start, "+
+        String sqlStmt = "INSERT into APPOINTMENTS(Title, Location, Type, Start, "+
                 "End, Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, "+
-                "User_ID)Values(?, ?, ?, ?,?, ?, ?, ?, ?, ?, ? ,?);";
+                "User_ID)Values(?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?);";
         try {
             //prepare the sql stmt
             PreparedStatement appointPS = JDBC.getConnection().prepareStatement(sqlStmt);
             //then insert value to prevent SQL injection attack
             appointPS.setString(1,title);
-            appointPS.setString(2,description);
-            appointPS.setString(3,location);
-            appointPS.setString(4,type);
-            appointPS.setString(5,TimeZones.convertToUTCTimeZone(start));
-            appointPS.setString(6,TimeZones.convertToUTCTimeZone(end));
-            appointPS.setString(7,TimeZones.getUTCTime());
-            appointPS.setString(8,createdBy);
-            appointPS.setString(9,TimeZones.getUTCTime());
-            appointPS.setString(10,createdBy);
-            appointPS.setString(11,customerId);
-            appointPS.setString(12,userId);
+            appointPS.setString(2,location);
+            appointPS.setString(3,type);
+            appointPS.setString(4,TimeZones.convertToUTCTimeZone(start));
+            appointPS.setString(5,TimeZones.convertToUTCTimeZone(end));
+            appointPS.setString(6,TimeZones.getUTCTime());
+            appointPS.setString(7,createdBy);
+            appointPS.setString(8,TimeZones.getUTCTime());
+            appointPS.setString(9,createdBy);
+            appointPS.setString(10,customerId);
+            appointPS.setString(11,userId);
             //execute the sql command
             appointPS.execute();
         } catch (SQLException throwable) {
@@ -258,7 +254,6 @@ public class DBAppointment {
      * Updates the data for a specified appointment
      * @param id appointment id
      * @param title appointment title
-     * @param description appointment description
      * @param location appointment location
      * @param type appointment type
      * @param startDate start date
@@ -269,7 +264,7 @@ public class DBAppointment {
      * @param customerID customer associated with the appointment
      * @param userID user associated with the appointment
      */
-    public static void updateAppointment(String id, String title, String description, String location,
+    public static void updateAppointment(String id, String title, String location,
                                          String type, String startDate,String startTime, String endDate,String endTime,String updatedBy, String customerID,
                                          String userID){
 
@@ -277,7 +272,7 @@ public class DBAppointment {
         String start = startDate+" "+startTime;
         String end = endDate+" "+endTime;
 
-        String sqlStmt = "UPDATE APPOINTMENTS SET Title = ?, Description = ?," +
+        String sqlStmt = "UPDATE APPOINTMENTS SET Title = ?," +
                 " Location = ?,Type = ?,Start = ?,End = ?,Last_Update = ?," +
                 " Last_Updated_By = ?,Customer_ID =?,User_ID = ?" +
                 " WHERE Appointment_ID = ?;";
@@ -286,16 +281,15 @@ public class DBAppointment {
             PreparedStatement appointPS = JDBC.getConnection().prepareStatement(sqlStmt);
             //then insert value to prevent SQL injection attack
             appointPS.setString(1,title);
-            appointPS.setString(2,description);
-            appointPS.setString(3,location);
-            appointPS.setString(4,type);
-            appointPS.setString(5,TimeZones.convertToUTCTimeZone(start));
-            appointPS.setString(6,TimeZones.convertToUTCTimeZone(end));
-            appointPS.setString(7,TimeZones.getUTCTime());
-            appointPS.setString(8,updatedBy);
-            appointPS.setString(9,customerID);
-            appointPS.setString(10,userID);
-            appointPS.setString(11,id);
+            appointPS.setString(2,location);
+            appointPS.setString(3,type);
+            appointPS.setString(4,TimeZones.convertToUTCTimeZone(start));
+            appointPS.setString(5,TimeZones.convertToUTCTimeZone(end));
+            appointPS.setString(6,TimeZones.getUTCTime());
+            appointPS.setString(7,updatedBy);
+            appointPS.setString(8,customerID);
+            appointPS.setString(9,userID);
+            appointPS.setString(10,id);
             //execute the sql command
             appointPS.execute();
         } catch (SQLException throwable) {
@@ -319,7 +313,6 @@ public class DBAppointment {
             while(results.next()){
                 int apptID = results.getInt("Appointment_ID");
                 String title = results.getString("Title");
-                String description = results.getString("Description");
                 String location = results.getString("Location");
                 String type = results.getString("Type");
                 String start = results.getString("Start");
@@ -334,7 +327,7 @@ public class DBAppointment {
                 String localEnd = TimeZones.convertToCurrentTimeZone(end);
                 String createDateLocal = TimeZones.convertToCurrentTimeZone(createDate);
                 String updateDateLocal = TimeZones.convertToCurrentTimeZone(lastUpdate);
-                appt = new Appointment(apptID,title,description,location,type,localStart,localEnd,createDateLocal,createdBy,updateDateLocal,lastUpdatedBy,custID,userID);
+                appt = new Appointment(apptID,title,location,type,localStart,localEnd,createDateLocal,createdBy,updateDateLocal,lastUpdatedBy,custID,userID);
                 apptList.add(appt);
             }
         }
@@ -354,7 +347,7 @@ public class DBAppointment {
         Appointment appt = null;
         try{
             String sqlStmt = "SELECT " +
-                    "Appointment_ID, Title, Description, Location, Type, Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID" +
+                    "Appointment_ID, Title, Location, Type, Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID" +
                     " FROM APPOINTMENTS" +
                     " WHERE Appointment_ID = ?;";
             PreparedStatement apptPS = JDBC.getConnection().prepareStatement(sqlStmt);
@@ -365,7 +358,6 @@ public class DBAppointment {
             while(results.next()){
                 int apptID = results.getInt("Appointment_ID");
                 String title = results.getString("Title");
-                String description = results.getString("Description");
                 String location = results.getString("Location");
                 String type = results.getString("Type");
                 String start = results.getString("Start");
@@ -380,7 +372,7 @@ public class DBAppointment {
                 String localEnd = TimeZones.convertToCurrentTimeZone(end);
                 String createDateLocal = TimeZones.convertToCurrentTimeZone(createDate);
                 String updateDateLocal = TimeZones.convertToCurrentTimeZone(lastUpdate);
-                appt = new Appointment(apptID,title,description,location,type,localStart,localEnd,createDateLocal,createdBy,updateDateLocal,lastUpdatedBy,custID,userID);
+                appt = new Appointment(apptID,title,location,type,localStart,localEnd,createDateLocal,createdBy,updateDateLocal,lastUpdatedBy,custID,userID);
             }
         }
         catch(SQLException throwable){
