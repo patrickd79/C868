@@ -4,6 +4,7 @@ package C868.Entities;
  * This is the class for the User object
  */
 public class User {
+
     private int userID;
     private String userName;
     private String password;
@@ -11,6 +12,7 @@ public class User {
     private String createdBy;
     private String lastUpdate;
     private String lastUpdatedBy;
+    private boolean admin;
 
     /**
      * This is the constructor method for the User object
@@ -22,7 +24,8 @@ public class User {
      * @param lastUpdate date and time user's record was last updated
      * @param lastUpdatedBy user who last updated the user's record
      */
-    public User(int userID, String userName, String password, String createdDate, String createdBy, String lastUpdate, String lastUpdatedBy) {
+    public User(int userID, String userName, String password, String createdDate, String createdBy,
+                String lastUpdate, String lastUpdatedBy, boolean admin) {
         this.userID = userID;
         this.userName = userName;
         this.password = password;
@@ -30,6 +33,20 @@ public class User {
         this.createdBy = createdBy;
         this.lastUpdate = lastUpdate;
         this.lastUpdatedBy = lastUpdatedBy;
+        this.admin = admin;
+    }
+
+    public User() {
+
+    }
+
+    public boolean authorized(){
+        System.out.println(this.getUserName()+ " is not an Admin User.");
+        return false;
+    }
+
+    public boolean isAdmin() {
+        return admin;
     }
 
     /**
@@ -143,4 +160,6 @@ public class User {
     public void setLastUpdatedBy(String lastUpdatedBy) {
         this.lastUpdatedBy = lastUpdatedBy;
     }
+
+
 }

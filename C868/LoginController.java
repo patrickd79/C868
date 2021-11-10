@@ -1,5 +1,6 @@
 package C868;
 
+import C868.Entities.AdminUser;
 import C868.Entities.User;
 import C868.Helper.DBUser;
 import C868.Helper.JDBC;
@@ -43,7 +44,9 @@ public class LoginController implements Initializable {
     @FXML
     public Label passwordLabel;
     public static String thisUser;
-    public User user;
+    public static String thisUserID;
+    public static User user;
+    public static AdminUser adminUser;
 
     public LoginController(){
     }
@@ -130,14 +133,15 @@ public class LoginController implements Initializable {
     public void getUserInput(){
         JDBC.openConnection();
         userName = userNameField.getText();
-        System.out.println("USER NAME = "+userName);
         passwordEntered = passwordField.getText();
-        System.out.println("PASSWORD ENTERED = "+passwordEntered);
         user = DBUser.getAUserByName(userName);
-        System.out.println("USER = "+user.getUserName());
+        thisUserID = String.valueOf(user.getUserID());
         validPassword = user.getPassword();
-        System.out.println("VALID PW = "+validPassword);
+        if(user.isAdmin()){
+            user = new AdminUser();
+        }
     }
+
 
     public void changeScene(String s, ActionEvent e) throws IOException {
         Parent newWindow = FXMLLoader.load(getClass().getResource(s));

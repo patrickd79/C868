@@ -3,7 +3,6 @@ package C868;
 import C868.Entities.Appointment;
 import C868.Entities.User;
 import C868.Helper.DBAppointment;
-import C868.Helper.DBUser;
 import C868.Helper.JDBC;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,7 +16,6 @@ import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
@@ -33,8 +31,10 @@ public class MainMenuController {
     public static User user;
     @FXML
     public Label mainMenuMessages;
-    public String userID;
+    public String userID = LoginController.thisUserID;
     public static Paint color;
+    public Button addUserBtn;
+    public Button updateUserBtn;
 
     //Just finished adding parameterized SQL stmts to the DBUser and DBCustomer files need to now add error checking
             //to the inputs (regex).
@@ -42,12 +42,21 @@ public class MainMenuController {
     public void initialize() {
         JDBC.openConnection();
         //System.out.println("UserName:  "+ LoginController.userNameField.getText().trim());
-        user = DBUser.getAUserByName(LoginController.thisUser);
+        user = LoginController.user;
         //user = DBUser.getAUserByName("User One");
-        userID = String.valueOf(user.getUserID());
+        //userID = String.valueOf(user.getUserID());
         populateMainMenuLabel();
+        hasAdminPrivileges();
 
 
+
+    }
+
+    public void hasAdminPrivileges(){
+        if(!user.authorized()){
+            addUserBtn.setDisable(true);
+            updateUserBtn.setDisable(true);
+        }
     }
 
     /**
@@ -145,7 +154,7 @@ public class MainMenuController {
 
     public void goToAddUserWindow(ActionEvent event) throws IOException {
         //only the administrator has access to change user information
-        if(LoginController.thisUser.equals("admin")) {
+        if(user.authorized()) {
         Parent addUserWindow = FXMLLoader.load(getClass().getResource("addUser.fxml"));
         Scene addUserScene = new Scene(addUserWindow);
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -154,6 +163,7 @@ public class MainMenuController {
         }else{
             mainMenuMessages.setTextFill(Color.RED);
             mainMenuMessages.setText("You do not have access to this feature. Please contact the administrator.");
+
         }
     }
     /**
@@ -171,7 +181,7 @@ public class MainMenuController {
 
     public void goToUpdateUserWindow(ActionEvent event) throws IOException {
         //only the administrator has access to change user information
-        if(LoginController.thisUser.equals("admin")) {
+        if(user.authorized()) {
             Parent updateUserWindow = FXMLLoader.load(getClass().getResource("chooseUserToUpdate.fxml"));
             Scene updateUserScene = new Scene(updateUserWindow);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

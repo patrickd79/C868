@@ -5,6 +5,7 @@ import C868.Helper.DBUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
@@ -34,6 +35,7 @@ public class UpdateUserController {
     @FXML
     public Label updateUserLastUpdateDate;
     public String userID;
+    public CheckBox adminCheckBox;
 
 
     public void goToMainMenuWindow(ActionEvent event) throws IOException {
@@ -63,10 +65,11 @@ public class UpdateUserController {
         String name = updateUserName.getText();
         String password = updatePassword.getText();
         String updatedBy = currentPersonUserUpdatedByField.getText();
+        boolean admin = adminCheckBox.isSelected();
         if(!updatedBy.isEmpty() && !name.isEmpty() && !password.isEmpty()) {
             try {
                 //call DBUser update method
-                DBUser.updateUser(userID, name, password, updatedBy);
+                DBUser.updateUser(userID, name, password, updatedBy, admin);
                 updateUserErrorField.setTextFill(Color.BLACK);
                 updateUserErrorField.setText("User Record Updated");
                 updateUserBtn.setDisable(true);

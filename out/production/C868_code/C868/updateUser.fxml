@@ -25,6 +25,7 @@
         <Label layoutX="319.0" layoutY="161.0" text="Created Date" />
         <Label layoutX="494.0" layoutY="66.0" text="Last Updated By" />
         <Label layoutX="481.0" layoutY="153.0" text="Last Update Date" />
+      <CheckBox fx:id="adminCheckBox" layoutX="34.0" layoutY="292.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Administrator" />
     </children>
 
 

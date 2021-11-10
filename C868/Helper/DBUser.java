@@ -14,7 +14,7 @@ import java.sql.SQLException;
  */
 public class DBUser {
 
-    public static void updateUser(String id, String name, String password, String updatedBy){
+    public static void updateUser(String id, String name, String password, String updatedBy, boolean admin){
 
         String sqlStmt = "UPDATE USERS " +
                 "SET" +
@@ -22,6 +22,7 @@ public class DBUser {
                 " Password = ?,"+
                 " Last_Update = ?," +
                 " Last_Updated_By = ?"+
+                " AdminUser = ?"+
                 " WHERE User_ID = ?;";
 
         System.out.println(sqlStmt);
@@ -33,7 +34,8 @@ public class DBUser {
             userPS.setString(2,password);
             userPS.setString(3,TimeZones.getUTCTime());
             userPS.setString(4,updatedBy);
-            userPS.setString(5,id);
+            userPS.setBoolean(5,admin);
+            userPS.setString(6,id);
             //execute the sql command
             userPS.execute();
         } catch (SQLException throwable) {
@@ -57,11 +59,11 @@ public class DBUser {
         }
     }
 
-    public static void addUser(String userName, String password,String createdBy){
+    public static void addUser(String userName, String password,String createdBy, boolean admin){
 
         String sqlStmt = "Insert into USERS(User_Name, Password, Create_Date, Created_By, Last_Update, " +
-                "Last_Updated_By)" +
-                "Values(?,?,?,?,?,?);";
+                "Last_Updated_By, AdminUser)" +
+                "Values(?,?,?,?,?,?,?);";
         try {
             //prepare the sql stmt
             PreparedStatement userPS = JDBC.getConnection().prepareStatement(sqlStmt);
@@ -72,6 +74,7 @@ public class DBUser {
             userPS.setString(4,createdBy);
             userPS.setString(5,TimeZones.getUTCTime());
             userPS.setString(6,createdBy);
+            userPS.setBoolean(7,admin);
 
             //execute the sql command
             userPS.execute();
@@ -87,7 +90,7 @@ public class DBUser {
     public static User getAUserByName(String name){
         User user = null;
         try{
-            String sqlStmt = "SELECT User_ID, User_Name, Password, Create_Date, Created_By, Last_Update, Last_Updated_By " +
+            String sqlStmt = "SELECT User_ID, User_Name, Password, Create_Date, Created_By, Last_Update, Last_Updated_By, AdminUser " +
                     "FROM USERS WHERE User_Name = ?;";
             PreparedStatement userPS = JDBC.getConnection().prepareStatement(sqlStmt);
             //then insert value to prevent SQL injection attack
@@ -108,7 +111,9 @@ public class DBUser {
                 System.out.println("Last_Update"+lastUpdate);
                 String lastUpdateBy = results.getString("Last_Updated_By");
                 System.out.println("Last_Updated_By"+lastUpdateBy);
-                user = new User(userID,userName,password,createDate,createBy,lastUpdate,lastUpdateBy);
+                boolean admin = results.getBoolean("AdminUser");
+                System.out.println("AdminUser "+ admin);
+                user = new User(userID,userName,password,createDate,createBy,lastUpdate,lastUpdateBy, admin);
             }
         }
         catch(SQLException throwable){
@@ -126,7 +131,7 @@ public class DBUser {
     public static User getAUserByID(int id){
         User user = null;
         try{
-            String sqlStmt = "SELECT User_ID, User_Name, Password, Create_Date, Created_By, Last_Update, Last_Updated_By " +
+            String sqlStmt = "SELECT User_ID, User_Name, Password, Create_Date, Created_By, Last_Update, Last_Updated_By, AdminUser " +
                     "FROM USERS WHERE User_ID = ?;";
             PreparedStatement userPS = JDBC.getConnection().prepareStatement(sqlStmt);
             //then insert value to prevent SQL injection attack
@@ -140,7 +145,9 @@ public class DBUser {
                 String createBy = results.getString("Created_By");
                 String lastUpdate = results.getString("Last_Update");
                 String lastUpdateBy = results.getString("Last_Updated_By");
-                user = new User(userID,userName,password,TimeZones.convertToCurrentTimeZone(createDate)  ,createBy,TimeZones.convertToCurrentTimeZone(lastUpdate),lastUpdateBy);
+                boolean admin = results.getBoolean("AdminUser");
+                System.out.println("AdminUser "+ admin);
+                user = new User(userID,userName,password,TimeZones.convertToCurrentTimeZone(createDate)  ,createBy,TimeZones.convertToCurrentTimeZone(lastUpdate),lastUpdateBy, admin);
             }
         }
         catch(SQLException throwable){
@@ -168,7 +175,9 @@ public class DBUser {
                 String createBy = results.getString("Created_By");
                 String lastUpdate = results.getString("Last_Update");
                 String lastUpdateBy = results.getString("Last_Updated_By");
-                user = new User(userID,userName,password,createDate,createBy,lastUpdate,lastUpdateBy);
+                boolean admin = results.getBoolean("AdminUser");
+                System.out.println(userName + " is admin? : "+ admin);
+                user = new User(userID,userName,password,createDate,createBy,lastUpdate,lastUpdateBy, admin);
                 userList.add(user);
             }
         }

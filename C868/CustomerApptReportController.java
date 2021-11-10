@@ -81,8 +81,8 @@ public class CustomerApptReportController {
 
     public void getSearchResults(ActionEvent event) throws IOException{
         try {
-            String name = searchField.getText();
-            ObservableList<Appointment> appts = searchAppointmentForTypeResultsList(name);
+            String searchStr = searchField.getText();
+            ObservableList<Appointment> appts = searchAppointmentForTypeResultsList(searchStr);
             tableView.setItems(appts);
             //searchField.setText("");
         }catch(Exception ex){

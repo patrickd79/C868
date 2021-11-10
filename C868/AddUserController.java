@@ -5,6 +5,7 @@ import C868.Helper.JDBC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
@@ -22,10 +23,11 @@ public class AddUserController {
     public Button addCustomerBtn;
     @FXML
     public Label addUserErrorField;
+    public CheckBox adminCheckBox;
 
     public void addUser(ActionEvent event){
         try {
-            DBUser.addUser(userNameField.getText(), userPasswordField.getText(),userCreatedByField.getText());
+            DBUser.addUser(userNameField.getText(), userPasswordField.getText(),userCreatedByField.getText(), adminCheckBox.isSelected());
             addUserErrorField.setTextFill(Color.BLACK);
             addUserErrorField.setText("User Record Created");
             addCustomerBtn.setDisable(true);
