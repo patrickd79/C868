@@ -17,14 +17,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 
 public class LoginController implements Initializable {
     @FXML
@@ -46,16 +44,7 @@ public class LoginController implements Initializable {
     public static String thisUser;
     public static String thisUserID;
     public static User user;
-    public static AdminUser adminUser;
-
     public LoginController(){
-    }
-
-    /**
-     * Displays the user's language setting
-     */
-    public void setLanguageDisplayLabel(){
-        languageDisplayLabel.setText(Main.zoneID + "   " +Main.zone + " : " + Main.userLanguage + " : " + Main.userCountry);
     }
 
     /**
@@ -64,8 +53,8 @@ public class LoginController implements Initializable {
     public void setLabels(){
         scheduleLogInLabel.setText("SchedulingApplication");
         logInBtn.setText("login");
-        userNameLabel.setText("username");
-        passwordLabel.setText("password");
+        userNameLabel.setText("Username");
+        passwordLabel.setText("Password");
     }
 
     /**
@@ -143,7 +132,6 @@ public class LoginController implements Initializable {
         }
     }
 
-
     public void changeScene(String s, ActionEvent e) throws IOException {
         Parent newWindow = FXMLLoader.load(getClass().getResource(s));
         Scene newScene = new Scene(newWindow);
@@ -154,9 +142,6 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        setLanguageDisplayLabel();
         setLabels();
-        System.out.println(TimeZones.getDayOfWeekEST("2021-10-19 08:00:00"));
     }
 }

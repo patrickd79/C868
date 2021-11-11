@@ -9,7 +9,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
-
 import java.io.IOException;
 
 public class AddUserController {
@@ -18,8 +17,6 @@ public class AddUserController {
     @FXML
     public TextField userPasswordField;
     @FXML
-    public TextField userCreatedByField;
-    @FXML
     public Button addCustomerBtn;
     @FXML
     public Label addUserErrorField;
@@ -27,7 +24,8 @@ public class AddUserController {
 
     public void addUser(ActionEvent event){
         try {
-            DBUser.addUser(userNameField.getText(), userPasswordField.getText(), LoginController.user.getUserName(), adminCheckBox.isSelected());
+            DBUser.addUser(userNameField.getText(), userPasswordField.getText(), LoginController.user.getUserName(),
+                    adminCheckBox.isSelected());
             addUserErrorField.setTextFill(Color.BLACK);
             addUserErrorField.setText("User Record Created");
             addCustomerBtn.setDisable(true);
@@ -45,6 +43,5 @@ public class AddUserController {
 
     public void initialize() {
         JDBC.openConnection();
-
     }
 }

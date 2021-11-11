@@ -4,14 +4,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="455.0" prefWidth="841.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="C868.ReportsController">
+<AnchorPane prefHeight="577.0" prefWidth="860.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="C868.ReportsController">
    <children>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="301.0" layoutY="14.0" prefHeight="44.0" prefWidth="202.0" text="Reports">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="320.0" layoutY="30.0" prefHeight="44.0" prefWidth="202.0" text="Reports">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <ComboBox fx:id="typesCombo" layoutX="444.0" layoutY="162.0" prefHeight="28.0" prefWidth="371.0" promptText="Types of appointments" />
+      <ComboBox fx:id="typesCombo" layoutX="441.0" layoutY="158.0" prefHeight="38.0" prefWidth="371.0" promptText="Types of appointments" />
       <Label layoutX="444.0" layoutY="107.0" prefHeight="23.0" prefWidth="270.0" text="Choose a Type to Query">
          <font>
             <Font size="18.0" />
@@ -24,11 +24,11 @@
       </Label>
 
 
-      <Label fx:id="reportErrorMsgField" layoutX="289.0" layoutY="513.0" prefHeight="81.0" prefWidth="545.0" wrapText="true" />
-      <Button fx:id="getCustomerBtn" layoutX="40.0" layoutY="226.0" mnemonicParsing="false" onAction="#getCustomerAppts" prefHeight="31.0" prefWidth="182.0" text="Retreive Customer Data" />
-      <Button fx:id="getTypesReportBtn" layoutX="444.0" layoutY="226.0" mnemonicParsing="false" onAction="#getApptByTypes" prefHeight="31.0" prefWidth="182.0" text="Retreive Type Data" />
+      <Label fx:id="reportErrorMsgField" layoutX="149.0" layoutY="439.0" prefHeight="81.0" prefWidth="545.0" wrapText="true" />
+      <Button fx:id="getCustomerBtn" layoutX="40.0" layoutY="226.0" mnemonicParsing="false" onAction="#getCustomerAppts" prefHeight="38.0" prefWidth="213.0" text="Retreive Customer Data" />
+      <Button fx:id="getTypesReportBtn" layoutX="444.0" layoutY="226.0" mnemonicParsing="false" onAction="#getApptByTypes" prefHeight="38.0" prefWidth="213.0" text="Retreive Type Data" />
 
-      <Button layoutX="626.0" layoutY="430.0" mnemonicParsing="false" onAction="#goToMainMenuWindow" prefHeight="31.0" prefWidth="123.0" text="Go to Main Menu" />
-      <ComboBox fx:id="customersCombo" layoutX="40.0" layoutY="162.0" prefHeight="27.0" prefWidth="213.0" promptText="Customers" />
+      <Button layoutX="315.0" layoutY="376.0" mnemonicParsing="false" onAction="#goToMainMenuWindow" prefHeight="38.0" prefWidth="213.0" text="Go to Main Menu" />
+      <ComboBox fx:id="customersCombo" layoutX="40.0" layoutY="158.0" prefHeight="38.0" prefWidth="213.0" promptText="Customers" />
    </children>
 </AnchorPane>

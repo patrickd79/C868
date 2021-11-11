@@ -52,7 +52,6 @@ public class TypeReportController {
         tableView.setItems(allApptsThisType);
         IDCol.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
-        descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
         locationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
         typeCol.setCellValueFactory(new PropertyValueFactory<>("typeName"));
         startCol.setCellValueFactory(new PropertyValueFactory<>("start"));

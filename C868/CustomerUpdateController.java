@@ -8,7 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
-
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -23,8 +22,6 @@ public class CustomerUpdateController {
     public TextField updateCustPostalCodeField;
     @FXML
     public TextField updateCustPhoneField;
-    @FXML
-    public TextField currentPersonCustomerUpdatedByField;
     @FXML
     public Button updateCustomerBtn;
     @FXML
@@ -50,9 +47,9 @@ public class CustomerUpdateController {
         String postalCode = updateCustPostalCodeField.getText();
         String phone = updateCustPhoneField.getText();
         String updatedBy = LoginController.user.getUserName();
-        if(!updatedBy.isEmpty() && !name.isEmpty() && !address.isEmpty() && !postalCode.isEmpty() && !phone.isEmpty()) {
+        if(!updatedBy.isEmpty() && !name.isEmpty() && !address.isEmpty() && !postalCode.isEmpty() &&
+                !phone.isEmpty()) {
             try {
-                //call DBCustomer update method
                 DBCustomer.updateCustomer(customerID, name, address, postalCode, phone, updatedBy);
                 updateCustErrorField.setTextFill(Color.BLACK);
                 updateCustErrorField.setText("Customer Record Updated");
@@ -84,8 +81,6 @@ public class CustomerUpdateController {
         updateCustCreatedOn.setText(customer.getCreatedDate());
         updateCustLastUpdatedBy.setText(customer.getLastUpdatedBy());
         updateCustLastUpdateDate.setText(customer.getLastUpdate());
-
-
     }
 
     public void goToMainMenuWindow(ActionEvent event) throws IOException {
@@ -93,12 +88,9 @@ public class CustomerUpdateController {
     }
 
     public void initialize() throws SQLException {
-        //JDBC.openConnection();
         customerID = ChooseCustomerToUpdateController.customerID;
         System.out.println("CUSTOMER ID update = " + customerID);
-
         populateCustomerData(customerID);
-        //System.out.println(customerID);
     }
 
 

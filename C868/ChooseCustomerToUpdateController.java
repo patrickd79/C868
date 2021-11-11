@@ -37,8 +37,6 @@ public class ChooseCustomerToUpdateController {
     public TableColumn<Customer, String> lastUpdateDateCol;
     @FXML
     public TableColumn<Customer, String> lastUpdatedByCol;
-    @FXML
-    public TableColumn<Customer, Integer> divIDCol;
     public static String customerID;
     public String name;
     @FXML
@@ -47,7 +45,6 @@ public class ChooseCustomerToUpdateController {
     public void initialize() {
         JDBC.openConnection();
         setTableView();
-
     }
 
     /**
@@ -99,7 +96,6 @@ public class ChooseCustomerToUpdateController {
                 deleteCustomerMessage.setText("Customer "+name+" deleted.");
                 setTableView();
             }
-
         }else{
             deleteCustomerMessage.setText("You must select a Customer to delete first.");
         }
@@ -122,7 +118,4 @@ public class ChooseCustomerToUpdateController {
     public void goToMainMenuWindow(ActionEvent event) throws IOException {
         Main.mainScreen.goToMain(event);
     }
-
-
-
 }

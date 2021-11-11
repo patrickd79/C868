@@ -13,7 +13,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class ChooseAppointmentToUpdateController {
@@ -23,8 +22,6 @@ public class ChooseAppointmentToUpdateController {
     public TableColumn<Appointment, Integer> IDCol;
     @FXML
     public TableColumn<Appointment, String> titleCol;
-    @FXML
-    public TableColumn<Appointment, String> descriptionCol;
     @FXML
     public TableColumn<Appointment, String> locationCol;
     @FXML
@@ -64,7 +61,6 @@ public class ChooseAppointmentToUpdateController {
         tableView.setItems(DBAppointment.getAllAppointments());
         IDCol.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
-        descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
         locationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
         typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
         startCol.setCellValueFactory(new PropertyValueFactory<>("start"));
@@ -123,7 +119,8 @@ public class ChooseAppointmentToUpdateController {
         if (alert.getResult() == ButtonType.OK) {
             try {
                 DBAppointment.deleteAppointment(apptID);
-                deleteAppointmentMessage.setText("Appointment Title: " + title + ", ID: " + apptID + " deleted.");
+                deleteAppointmentMessage.setText("Appointment Title: " + title + ", ID: " +
+                        apptID + " deleted.");
                 setTableView();
             } catch (Exception e) {
                 deleteAppointmentMessage.setText("You must select an Appointment to delete first.");

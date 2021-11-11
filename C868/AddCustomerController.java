@@ -8,7 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
-
 import java.io.IOException;
 
 public class AddCustomerController {
@@ -21,14 +20,9 @@ public class AddCustomerController {
     @FXML
     public TextField custPhoneField;
     @FXML
-    public TextField customerCreatedByField;
-    @FXML
     public Button addCustomerBtn;
     @FXML
     public Label addCustErrorField;
-    @FXML
-    public TextField custCityField;
-
 
     /**
      * Adds a customer record to the database.
@@ -51,12 +45,8 @@ public class AddCustomerController {
     }
 
     public static void checkInputs(){
-
+            //w
     }
-
-
-
-
 
     public void goToMainMenuWindow(ActionEvent event) throws IOException {
         Main.mainScreen.goToMain(event);
@@ -64,9 +54,5 @@ public class AddCustomerController {
 
     public void initialize() {
         JDBC.openConnection();
-
     }
-
-
-
 }

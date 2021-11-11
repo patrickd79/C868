@@ -6,14 +6,14 @@
 <AnchorPane prefHeight="493.0" prefWidth="823.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="C868.AddAppointmentController">
    <children>
       <Label alignment="CENTER" layoutX="312.0" layoutY="27.0" prefHeight="30.0" prefWidth="144.0" text="Add Appointment" />
-      <Button fx:id="addApptBtn" layoutX="600.0" layoutY="379.0" mnemonicParsing="false" onAction="#addAppointment" text="Add Appointment" />
+      <Button fx:id="addApptBtn" layoutX="600.0" layoutY="392.0" mnemonicParsing="false" onAction="#addAppointment" text="Add Appointment" />
       <TextField fx:id="addAppointmentTitleField" layoutX="36.0" layoutY="132.0" promptText="Title" />
       <TextField fx:id="addAppointmentLocationField" layoutX="36.0" layoutY="214.0" promptText="Location" />
       <ComboBox fx:id="typeCombo" layoutX="36.0" layoutY="291.0" prefHeight="27.0" prefWidth="167.0" promptText="Type" />
       <DatePicker fx:id="addAppointmentStartDate" layoutX="601.0" layoutY="132.0" promptText="Date" />
       <Label layoutX="255.0" layoutY="207.0" prefHeight="100.0" prefWidth="303.0" />
       <Button layoutX="88.0" layoutY="392.0" mnemonicParsing="false" onAction="#goToMainMenuWindow" text="Go To Main Menu" />
-      <Label fx:id="addApptErrorField" layoutX="386.0" layoutY="27.0" prefHeight="39.0" prefWidth="275.0" textFill="#d80c0c" />
+      <Label fx:id="addApptErrorField" layoutX="247.0" layoutY="214.0" prefHeight="122.0" prefWidth="275.0" textFill="#d80c0c" wrapText="true" />
       <TextField fx:id="addApptStartTimeField" layoutX="601.0" layoutY="214.0" promptText="Start Time" />
       <TextField fx:id="addApptEndTimeField" layoutX="600.0" layoutY="294.0" promptText="End Time" />
       <Label layoutX="34.0" layoutY="102.0" prefHeight="17.0" prefWidth="161.0" text="Title" />

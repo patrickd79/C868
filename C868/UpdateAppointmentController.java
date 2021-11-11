@@ -80,7 +80,7 @@ public class UpdateAppointmentController {
         String customerID = String.valueOf(customer.getCustomer_ID());
         //User user = DBUser.getAUserByName(userCombo.getValue());
         //String customerID = String.valueOf(customer.getCustomer_ID());
-        User user = DBUser.getAUserByName(userCombo.getValue());
+        User user = DBUser.getAUserByName("owner");
         String userID = String.valueOf(user.getUserID());
         //String userID = String.valueOf(user.getUserID());
         {
@@ -103,7 +103,7 @@ public class UpdateAppointmentController {
                 String startDateAndTime = startDate +" "+startTime;
                 String endDateAndTime = startDate +" "+endTime;
 
-                if (!updatingNowField.getText().equals("") && AddAppointmentController.isDuringOfficeHours(startDateAndTime, endDateAndTime) &&
+                if (AddAppointmentController.isDuringOfficeHours(startDateAndTime, endDateAndTime) &&
                         !AddAppointmentController.customerHasOverlappingAppointments(String.valueOf(customer.getCustomer_ID()),startDateAndTime, endDateAndTime, apptID)) {
                     System.out.println("update appt line 120");
                     //call DBCustomer update method

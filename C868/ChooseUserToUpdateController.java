@@ -14,7 +14,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class ChooseUserToUpdateController {
@@ -63,10 +62,11 @@ public class ChooseUserToUpdateController {
 
     public void deleteUser(ActionEvent event) throws IOException {
         userToUpdate();
-        if(name.equals("admin")){
+        User user = DBUser.getAUserByID(Integer.parseInt(userID));
+        if(user.authorized()){
             updateUserMessage.setTextFill(Color.RED);
             updateUserMessage.setText("Administrator cannot be deleted");
-        }else if(userID != null && !name.equals(null)){
+        }else if(userID != null && !user.authorized()){
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setHeaderText("Confirm User Delete");
             alert.setContentText("Are you sure you want to delete User: "+name+"?" );
@@ -76,7 +76,6 @@ public class ChooseUserToUpdateController {
                 updateUserMessage.setText("User "+name+" deleted.");
                 setTableView();
             }
-
         }else{
             updateUserMessage.setText("You must select a Customer to delete first.");
         }
@@ -91,7 +90,6 @@ public class ChooseUserToUpdateController {
         window.show();
     }
 
-
     public void goToMainMenuWindow(ActionEvent event) throws IOException {
         Main.mainScreen.goToMain(event);
     }
@@ -99,6 +97,5 @@ public class ChooseUserToUpdateController {
     public void initialize() {
         JDBC.openConnection();
         setTableView();
-
     }
 }
