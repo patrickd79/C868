@@ -6,15 +6,14 @@
 <AnchorPane prefHeight="561.0" prefWidth="1268.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="C868.TypeReportController">
 
     <children>
-        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="529.0" layoutY="36.0" text="Appointments By Type" />
-        <Button layoutX="1058.0" layoutY="477.0" mnemonicParsing="false" onAction="#goToMainMenuWindow" text="Go To Main Menu" />
+        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="538.0" layoutY="14.0" prefHeight="48.0" prefWidth="192.0" text="Appointments By Type" />
+        <Button layoutX="1077.0" layoutY="450.0" mnemonicParsing="false" onAction="#goToMainMenuWindow" prefHeight="38.0" prefWidth="150.0" text="Go To Main Menu" />
 
-        <Button layoutX="759.0" layoutY="477.0" mnemonicParsing="false" onAction="#goToReportsWindow" text="Back to Reports Setup" />
-        <TableView fx:id="tableView" layoutX="9.0" layoutY="85.0" prefHeight="254.0" prefWidth="1246.0">
+        <Button layoutX="559.0" layoutY="450.0" mnemonicParsing="false" onAction="#goToReportsWindow" prefHeight="38.0" prefWidth="150.0" text="Back to Reports Setup" />
+        <TableView fx:id="tableView" layoutX="30.0" layoutY="85.0" prefHeight="254.0" prefWidth="1203.0">
             <columns>
                 <TableColumn fx:id="IDCol" prefWidth="45.0" text="ID" />
                 <TableColumn fx:id="titleCol" prefWidth="147.0" text="Title" />
-                <TableColumn fx:id="descriptionCol" prefWidth="98.0" text="Description" />
                 <TableColumn fx:id="locationCol" prefWidth="58.0" text="Location" />
                 <TableColumn fx:id="typeCol" prefWidth="134.0" text="Type" />
                 <TableColumn fx:id="startCol" prefWidth="145.0" text="Start" />
@@ -29,10 +28,10 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
         </TableView>
-        <Label fx:id="message" layoutX="798.0" layoutY="371.0" prefHeight="48.0" prefWidth="429.0" textFill="#e40e0e" />
-      <TextField fx:id="searchField" layoutX="57.0" layoutY="410.0" onAction="#getSearchResults" prefHeight="27.0" prefWidth="335.0" />
-      <Label layoutX="57.0" layoutY="368.0" prefHeight="27.0" prefWidth="335.0" text="Search by Student Name" />
-      <Button layoutX="57.0" layoutY="450.0" mnemonicParsing="false" onAction="#getSearchResults" text="Search" />
+        <Label fx:id="message" layoutX="484.0" layoutY="371.0" prefHeight="48.0" prefWidth="743.0" textFill="#e40e0e" />
+      <TextField fx:id="searchField" layoutX="30.0" layoutY="406.0" onAction="#getSearchResults" prefHeight="27.0" prefWidth="335.0" />
+      <Label layoutX="30.0" layoutY="371.0" prefHeight="27.0" prefWidth="335.0" text="Search by Student Name" />
+      <Button layoutX="30.0" layoutY="450.0" mnemonicParsing="false" onAction="#getSearchResults" prefHeight="38.0" prefWidth="150.0" text="Search" />
     </children>
 
 </AnchorPane>

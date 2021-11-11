@@ -6,18 +6,18 @@
 
 <AnchorPane prefHeight="638.0" prefWidth="1098.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="C868.MainMenuController">
    <children>
-      <Button layoutX="65.0" layoutY="84.0" mnemonicParsing="false" onAction="#goToAddCustomerWindow" text="Add Customer" />
-      <Button layoutX="385.0" layoutY="84.0" mnemonicParsing="false" onAction="#goToAddAppointmentWindow" text="Add Appointment" />
-      <Label layoutX="285.0" layoutY="14.0" text="Main Menu" />
-      <Button layoutX="65.0" layoutY="178.0" mnemonicParsing="false" onAction="#goToUpdateCustomerWindow" text="Update Customer" />
-      <Button layoutX="385.0" layoutY="178.0" mnemonicParsing="false" onAction="#goToUpdateAppointmentWindow" text="Update Appointment" />
-      <Button layoutX="388.0" layoutY="256.0" mnemonicParsing="false" onAction="#goToViewAppointmentWindow" text="View Appointments" />
-      <Button fx:id="addUserBtn" layoutX="632.0" layoutY="84.0" mnemonicParsing="false" onAction="#goToAddUserWindow" text="Add User" />
-      <Label fx:id="mainMenuMessages" layoutX="39.0" layoutY="353.0" prefHeight="141.0" prefWidth="643.0" text="Messages" wrapText="true">
+      <Button layoutX="65.0" layoutY="98.0" mnemonicParsing="false" onAction="#goToAddCustomerWindow" prefHeight="57.0" prefWidth="150.0" text="Add Customer" />
+      <Button layoutX="460.0" layoutY="98.0" mnemonicParsing="false" onAction="#goToAddAppointmentWindow" prefHeight="57.0" prefWidth="150.0" text="Add Appointment" />
+      <Label alignment="CENTER" layoutX="447.0" layoutY="14.0" prefHeight="40.0" prefWidth="176.0" text="Main Menu" />
+      <Button layoutX="65.0" layoutY="185.0" mnemonicParsing="false" onAction="#goToUpdateCustomerWindow" prefHeight="57.0" prefWidth="150.0" text="Update Customer" />
+      <Button layoutX="460.0" layoutY="185.0" mnemonicParsing="false" onAction="#goToUpdateAppointmentWindow" prefHeight="57.0" prefWidth="150.0" text="Update Appointment" />
+      <Button layoutX="460.0" layoutY="270.0" mnemonicParsing="false" onAction="#goToViewAppointmentWindow" prefHeight="57.0" prefWidth="150.0" text="View Appointments" />
+      <Button fx:id="addUserBtn" layoutX="845.0" layoutY="98.0" mnemonicParsing="false" onAction="#goToAddUserWindow" prefHeight="57.0" prefWidth="150.0" text="Add User" />
+      <Label fx:id="mainMenuMessages" alignment="CENTER" layoutX="228.0" layoutY="432.0" prefHeight="141.0" prefWidth="643.0" text="Messages" wrapText="true">
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Button layoutX="65.0" layoutY="256.0" mnemonicParsing="false" onAction="#goToUpdateReportsWindow" text="Reports" />
-      <Button fx:id="updateUserBtn" layoutX="632.0" layoutY="171.0" mnemonicParsing="false" onAction="#goToUpdateUserWindow" text="Update User" />
+      <Button layoutX="65.0" layoutY="270.0" mnemonicParsing="false" onAction="#goToUpdateReportsWindow" prefHeight="57.0" prefWidth="150.0" text="Reports" />
+      <Button fx:id="updateUserBtn" layoutX="845.0" layoutY="185.0" mnemonicParsing="false" onAction="#goToUpdateUserWindow" prefHeight="57.0" prefWidth="150.0" text="Update User" />
    </children>
 </AnchorPane>

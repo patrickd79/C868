@@ -27,7 +27,7 @@ public class AddUserController {
 
     public void addUser(ActionEvent event){
         try {
-            DBUser.addUser(userNameField.getText(), userPasswordField.getText(),userCreatedByField.getText(), adminCheckBox.isSelected());
+            DBUser.addUser(userNameField.getText(), userPasswordField.getText(), LoginController.user.getUserName(), adminCheckBox.isSelected());
             addUserErrorField.setTextFill(Color.BLACK);
             addUserErrorField.setText("User Record Created");
             addCustomerBtn.setDisable(true);

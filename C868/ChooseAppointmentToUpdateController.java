@@ -118,7 +118,7 @@ public class ChooseAppointmentToUpdateController {
         apptToUpdate();
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText("Confirm Appointment Delete");
-        alert.setContentText("Are you sure you want to delete Appointment: "+title+ ","+thisAppt.getDescription()+"?" );
+        alert.setContentText("Are you sure you want to delete Appointment: "+title+"?" );
         alert.showAndWait();
         if (alert.getResult() == ButtonType.OK) {
             try {
