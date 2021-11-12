@@ -17,9 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-
 
 public class ViewAppointmentsController {
     @FXML
@@ -28,8 +26,6 @@ public class ViewAppointmentsController {
     public TableColumn<Appointment, Integer> IDCol;
     @FXML
     public TableColumn<Appointment, String> titleCol;
-    @FXML
-    public TableColumn<Appointment, String> descriptionCol;
     @FXML
     public TableColumn<Appointment, String> locationCol;
     @FXML
@@ -50,10 +46,7 @@ public class ViewAppointmentsController {
     public TableColumn<Appointment, String> customerIDCol;
     @FXML
     public TableColumn<Appointment, String> userIDCol;
-
-    public static String apptID;
     public static String title;
-    public static Appointment thisAppt;
     @FXML
     public Label viewApptErrorField;
 
@@ -69,7 +62,6 @@ public class ViewAppointmentsController {
         tableView.setItems(DBAppointment.getAllAppointments());
         IDCol.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
-        descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
         locationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
         typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
         startCol.setCellValueFactory(new PropertyValueFactory<>("start"));
@@ -91,7 +83,6 @@ public class ViewAppointmentsController {
             tableView.setItems(DBAppointment.getAppointmentsByMonth());
             IDCol.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
             titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
-            descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
             locationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
             typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
             startCol.setCellValueFactory(new PropertyValueFactory<>("start"));
@@ -120,7 +111,6 @@ public class ViewAppointmentsController {
             tableView.setItems(DBAppointment.getAppointmentsByWeek());
             IDCol.setCellValueFactory(new PropertyValueFactory<>("appointmentID"));
             titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
-            descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
             locationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
             typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
             startCol.setCellValueFactory(new PropertyValueFactory<>("start"));

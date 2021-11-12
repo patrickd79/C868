@@ -14,15 +14,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class TypeReportController {
-
     public TableView<Appointment> tableView;
     public TableColumn<Appointment, Integer> IDCol;
     public TableColumn<Appointment, String> titleCol;
-    public TableColumn<Appointment, String> descriptionCol;
     public TableColumn<Appointment, String> locationCol;
     public TableColumn<Appointment, String> typeCol;
     public TableColumn<Appointment, String> startCol;

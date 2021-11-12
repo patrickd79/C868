@@ -9,7 +9,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
-
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -37,7 +36,6 @@ public class UpdateUserController {
     public String userID;
     public CheckBox adminCheckBox;
 
-
     public void goToMainMenuWindow(ActionEvent event) throws IOException {
         Main.mainScreen.goToMain(event);
     }
@@ -58,7 +56,6 @@ public class UpdateUserController {
         updateUserCreatedOn.setText(user.getCreatedDate());
         updateUserLastUpdatedBy.setText(user.getLastUpdatedBy());
         updateUserLastUpdateDate.setText(user.getLastUpdate());
-
     }
 
     public void updateUser(ActionEvent event) throws Exception {
@@ -68,7 +65,6 @@ public class UpdateUserController {
         boolean admin = adminCheckBox.isSelected();
         if(!updatedBy.isEmpty() && !name.isEmpty() && !password.isEmpty()) {
             try {
-                //call DBUser update method
                 DBUser.updateUser(userID, name, password, updatedBy, admin);
                 updateUserErrorField.setTextFill(Color.BLACK);
                 updateUserErrorField.setText("User Record Updated");
@@ -85,11 +81,8 @@ public class UpdateUserController {
     }
 
     public void initialize() throws SQLException {
-        //JDBC.openConnection();
         userID = ChooseUserToUpdateController.userID;
         System.out.println("USER ID update = " + userID);
-
         populateUserData(userID);
-        //System.out.println(customerID);
     }
 }

@@ -11,7 +11,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
-
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -23,12 +22,9 @@ public class UpdateAppointmentController {
     @FXML
     public ComboBox<String> customerCombo;
     @FXML
-    public ComboBox<String> userCombo;
-    @FXML
     public TextField startTimeField;
     @FXML
     public TextField endTimeField;
-
     @FXML
     public TextField titleField;
     @FXML
@@ -43,8 +39,6 @@ public class UpdateAppointmentController {
     public TextField lastUpdatedByField;
     @FXML
     public Label updateApptErrorField;
-    @FXML
-    public TextField updatingNowField;
     private static String apptID;
     @FXML
     public Button updateBtn;
@@ -53,9 +47,6 @@ public class UpdateAppointmentController {
     ObservableList<Customer> customers = FXCollections.observableArrayList();
     ObservableList<String> customerNames = FXCollections.observableArrayList();
     ObservableList<String> customerIDs = FXCollections.observableArrayList();
-    ObservableList<User> users = FXCollections.observableArrayList();
-    ObservableList<String> userNames = FXCollections.observableArrayList();
-    ObservableList<String> userIDs = FXCollections.observableArrayList();
     ObservableList<Type> types = FXCollections.observableArrayList();
     ObservableList<String> typeNames = FXCollections.observableArrayList();
 
@@ -65,7 +56,6 @@ public class UpdateAppointmentController {
      * @throws IOException
      */
     public void updateAppointment(ActionEvent event) throws IOException {
-
         String id = apptID;
         String title = titleField.getText();
         String location = locationField.getText();
@@ -78,33 +68,15 @@ public class UpdateAppointmentController {
         String updatedBy = LoginController.thisUser;
         Customer customer = DBCustomer.getACustomerByName(customerCombo.getValue());
         String customerID = String.valueOf(customer.getCustomer_ID());
-        //User user = DBUser.getAUserByName(userCombo.getValue());
-        //String customerID = String.valueOf(customer.getCustomer_ID());
         User user = DBUser.getAUserByName("owner");
         String userID = String.valueOf(user.getUserID());
-        //String userID = String.valueOf(user.getUserID());
         {
             try {
-                String adjustedStartTime;
-                String adjustedEndTime;
-
-                //adjust time to a 24 hour clock for the start time
-                /*if (startPMToggle.isSelected() && AddAppointmentController.getHour(startTime) < 12) {
-                    adjustedStartTime = (AddAppointmentController.getHour(startTime) + 12) + ":" + AddAppointmentController.getMinutes(startTime);
-                } else {
-                    adjustedStartTime = startTime;
-                }
-                //adjust time to a 24 hour clock for the end time
-                if (endPMToggle.isSelected() && AddAppointmentController.getHour(endTime) < 12) {
-                    adjustedEndTime = (AddAppointmentController.getHour(endTime) + 12) + ":" + AddAppointmentController.getMinutes(endTime);
-                } else {
-                    adjustedEndTime = endTime;
-                }*/
                 String startDateAndTime = startDate +" "+startTime;
                 String endDateAndTime = startDate +" "+endTime;
-
                 if (AddAppointmentController.isDuringOfficeHours(startDateAndTime, endDateAndTime) &&
-                        !AddAppointmentController.customerHasOverlappingAppointments(String.valueOf(customer.getCustomer_ID()),startDateAndTime, endDateAndTime, apptID)) {
+                        !AddAppointmentController.customerHasOverlappingAppointments(String.valueOf(customer.getCustomer_ID()),
+                                startDateAndTime, endDateAndTime, apptID)) {
                     System.out.println("update appt line 120");
                     //call DBCustomer update method
                     DBAppointment.updateAppointment(id, title, location, typeID, startDate,
@@ -112,23 +84,22 @@ public class UpdateAppointmentController {
                     updateApptErrorField.setTextFill(Color.BLACK);
                     updateApptErrorField.setText("Appointment Record Updated");
                     updateBtn.setDisable(true);
-
                 }else if(!AddAppointmentController.isDuringOfficeHours(startDateAndTime, endDateAndTime)){
                     updateApptErrorField.setTextFill(Color.RED);
                     updateApptErrorField.setText("Please make sure that appointment time is between 0800 EST and 2200 EST.");
-                }else if(AddAppointmentController.customerHasOverlappingAppointments(String.valueOf(customer.getCustomer_ID()),startDateAndTime, endDateAndTime,apptID)){
+                }else if(AddAppointmentController.customerHasOverlappingAppointments(String.valueOf(customer.getCustomer_ID()),
+                        startDateAndTime, endDateAndTime,apptID)){
                     System.out.println("update appt line 131");
                     updateApptErrorField.setTextFill(Color.RED);
-                    updateApptErrorField.setText("Please change the date or time of this appointment. This appointment overlaps another one of the customer's appointments.");
+                    updateApptErrorField.setText("Please change the date or time of this appointment. " +
+                            "This appointment overlaps another one of the customer's appointments.");
                 }
-
             } catch (Exception exception) {
                 updateApptErrorField.setTextFill(Color.RED);
                 updateApptErrorField.setText("Please complete all fields");
                 exception.printStackTrace();
             }
         }
-
     }
 
     public void goToMainMenuWindow(ActionEvent event) throws IOException {
@@ -193,7 +164,6 @@ public class UpdateAppointmentController {
      * Populates the text fields with the data for the selected appointment.
      */
     public void populateAppointmentData(){
-
         int customerID = appt.getCustomerID();
         Customer customer = DBCustomer.getACustomerByID(customerID);
         apptIDLabel.setText(String.valueOf(appt.getAppointmentID()));
@@ -207,12 +177,11 @@ public class UpdateAppointmentController {
         lastUpdateDateField.setText(getDateAndTimeNoSeconds(appt.getLastUpdate()));
         lastUpdatedByField.setText(appt.getLastUpdatedBy());
         populateComboBoxCustomerNames();
-        //populateComboBoxUserNames();
         populateComboBoxTypeNames();
         typeCombo.setValue(DBType.getATypeByID(appt.getType()).getTypeName());
         customerCombo.setValue(customer.getCustomer_Name());
-
     }
+
     /**
      *  Adds all the customer names to an Observable List of Strings and then sets the combo box with the values.
      */
@@ -223,17 +192,10 @@ public class UpdateAppointmentController {
         }
         customerCombo.setItems(customerNames);
     }
+
     /**
      * Adds all the user names to an Observable List of Strings and then sets the combo box with the values.
      */
-    /*public void populateComboBoxUserNames(){
-        for(User u : users){
-            userNames.add(u.getUserName());
-            userIDs.add(String.valueOf(u.getUserID()));
-        }
-        userCombo.setItems(userNames);
-    }*/
-
     public void populateComboBoxTypeNames(){
         for(Type t : types){
             typeNames.add(t.getTypeName());
