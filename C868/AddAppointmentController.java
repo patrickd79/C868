@@ -26,8 +26,6 @@ public class AddAppointmentController {
     @FXML
     public ComboBox<String> addAppointmentCustIDField;
     @FXML
-    public ComboBox<String> addAppointmentUserIDField;
-    @FXML
     public Label addApptErrorField;
     @FXML
     public TextField addApptStartTimeField;
@@ -104,7 +102,7 @@ public class AddAppointmentController {
     /**
      * @param time string representing the time portion of the date time.
      * @return Returns an int representing the time portion of the date string with the colon
-     * removed, so that mathematical operations and be performed upon it.
+     * removed, so that mathematical operations can be performed upon it.
      */
     public static int removeColonFromTime(String time) {
         char[] ca = time.toCharArray();
@@ -140,6 +138,31 @@ public class AddAppointmentController {
         //System.out.println(result);
         return result;
     }
+    public boolean validateFields(String title, String location, String date, String start,
+                                         String end){
+        System.out.println("Date: " + date);
+        if(DataValidation.isValidTitle(title) && DataValidation.isValidLocation(location) &&
+        DataValidation.isValidDate(date) && DataValidation.isValidTime(start) &&
+                DataValidation.isValidTime(end) && !typeCombo.getSelectionModel().isEmpty()
+        && !addAppointmentCustIDField.getSelectionModel().isEmpty()){
+            return true;
+        }else if (!DataValidation.isValidTitle(title)){
+            DataValidation.entryErrorAlert("Title");
+        }else if (!DataValidation.isValidLocation(location)){
+            DataValidation.entryErrorAlert("Location");
+        }else if (!DataValidation.isValidDate(date)){
+            DataValidation.entryErrorAlert("Date");
+        }else if (!DataValidation.isValidTime(start)){
+            DataValidation.entryErrorAlert("Start Time");
+        }else if (!DataValidation.isValidTime(end)){
+            DataValidation.entryErrorAlert("End Time");
+        }else if (addAppointmentCustIDField.getSelectionModel().isEmpty()){
+            DataValidation.entryErrorAlert("Customer");
+        }else if (typeCombo.getSelectionModel().isEmpty()){
+            DataValidation.entryErrorAlert("Appointment Type");
+        }
+        return false;
+    }
 
     /**
      * Adds an appointment record to the database.
@@ -147,35 +170,40 @@ public class AddAppointmentController {
      * @param event
      */
     public void addAppointment(ActionEvent event) {
+
         try {
             User user = DBUser.getAUserByName("owner");
             Customer customer = DBCustomer.getACustomerByName(addAppointmentCustIDField.getValue());
             String start = addApptStartTimeField.getText();
             String end = addApptEndTimeField.getText();
-            String startTime = addAppointmentStartDate.getValue().toString() + " " + start;
-            String endTime = addAppointmentStartDate.getValue().toString() + " " + end;
+            String date = addAppointmentStartDate.getValue().toString();
+            String startTime = date + " " + start;
+            String endTime = date + " " + end;
             String typeID = String.valueOf(DBType.getATypeByName(typeCombo.getValue()).getTypeID());
-            if (isDuringOfficeHours(startTime, endTime) &&
-                    !customerHasOverlappingAppointments(sv.str(customer.getCustomer_ID()),
-                            startTime, endTime, "0")) {
-                DBAppointment.addAppointment(addAppointmentTitleField.getText(),
-                        addAppointmentLocationField.getText(),
-                        typeID, startTime, endTime,
-                        LoginController.thisUser,
-                        sv.str(customer.getCustomer_ID()), sv.str(user.getUserID()));
-                addApptErrorField.setTextFill(Color.BLACK);
-                addApptErrorField.setText("Appointment Created");
-                addApptBtn.setDisable(true);
+            String location = addAppointmentLocationField.getText();
+            String title = addAppointmentTitleField.getText();
+            if(validateFields(title, location, date, start, end)) {
+                if (isDuringOfficeHours(startTime, endTime) &&
+                        !customerHasOverlappingAppointments(sv.str(customer.getCustomer_ID()),
+                                startTime, endTime, "0")) {
+                    DBAppointment.addAppointment(title, location,
+                            typeID, startTime, endTime,
+                            LoginController.thisUser,
+                            sv.str(customer.getCustomer_ID()), sv.str(user.getUserID()));
+                    addApptErrorField.setTextFill(Color.BLACK);
+                    addApptErrorField.setText("Appointment Created");
+                    addApptBtn.setDisable(true);
 
-            } else if (!isDuringOfficeHours(startTime, endTime)) {
-                addApptErrorField.setTextFill(Color.RED);
-                addApptErrorField.setText("Please make sure that appointment time is between 0800 "+
-                        "EST and 2200 EST.");
-            } else if (customerHasOverlappingAppointments(sv.str(customer.getCustomer_ID()),
-                    startTime, endTime, "0")) {
-                addApptErrorField.setTextFill(Color.RED);
-                addApptErrorField.setText("Please change the date or time of this appointment. " +
-                        "This appointment overlaps another one of the customer's appointments.");
+                } else if (!isDuringOfficeHours(startTime, endTime)) {
+                    addApptErrorField.setTextFill(Color.RED);
+                    addApptErrorField.setText("Please make sure that appointment time is between 0800 " +
+                            "EST and 2200 EST.");
+                } else if (customerHasOverlappingAppointments(sv.str(customer.getCustomer_ID()),
+                        startTime, endTime, "0")) {
+                    addApptErrorField.setTextFill(Color.RED);
+                    addApptErrorField.setText("Please change the date or time of this appointment. " +
+                            "This appointment overlaps another one of the customer's appointments.");
+                }
             }
         } catch (Exception e) {
             addApptErrorField.setTextFill(Color.RED);
@@ -193,6 +221,8 @@ public class AddAppointmentController {
             customerNames.add(c.getCustomer_Name());
         }
         addAppointmentCustIDField.setItems(customerNames);
+        System.out.println("Run4");
+
     }
 
 
@@ -213,7 +243,10 @@ public class AddAppointmentController {
     public void initialize() {
         JDBC.openConnection();
         customers = DBCustomer.getAllCustomers();
+        System.out.println("Customers: " + customers.size());
         types = DBType.getAllTypes();
+        System.out.println("Types: " + types.size());
+
         populateComboBoxCustomerNames();
         populateComboBoxTypeNames();
     }

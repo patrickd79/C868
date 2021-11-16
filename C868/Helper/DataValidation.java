@@ -31,5 +31,17 @@ public class DataValidation {
         return timeString.matches("^(0?[0-9]|1[0-9]|2[0-3]):[0-9]+$");
     }
 
+    public static boolean isValidDate(String dateString){
+        return dateString.matches("^\\d{4}-\\d{2}-\\d{2}$");
+    }
+
+    public static boolean isValidLocation(String locationString){
+        return !locationString.equals("");
+    }
+    public static boolean isValidTitle(String titleString){
+        return !titleString.equals("");
+    }
+
+
 
 }
