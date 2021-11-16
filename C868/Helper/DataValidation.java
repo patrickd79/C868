@@ -16,11 +16,11 @@ public class DataValidation {
     }
 
     public static boolean isValidName(String nameString){
-        return nameString.matches("^[a-zA-Z]+\\s?[a-zA-Z]?+$");
+        return nameString.matches("^[a-zA-Z]{1,20}+[ ]+[a-zA-Z]{1,20}+$");
     }
-
     public static boolean isValidAddress(String addressString){
-        return addressString.matches("^[0-9]+\\s[0-9a-zA-Z]+\\s[a-zA-Z]+\\.?+,\\s?[a-zA-Z]$");
+        return addressString.matches("^[0-9]+\\s?[a-zA-Z0-9]+\\s?[A-Za-z]+[.]?+\\s?+[,]?+" +
+                "\\s?+[A-Za-z]+[,]?+\\s?+[A-Za-z]+$");
     }
 
     public static boolean isValidPostalCode(String zipString){
