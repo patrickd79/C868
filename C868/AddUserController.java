@@ -1,6 +1,7 @@
 package C868;
 
 import C868.Helper.DBUser;
+import C868.Helper.DataValidation;
 import C868.Helper.JDBC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+
 import java.io.IOException;
 
 public class AddUserController {
@@ -24,17 +26,32 @@ public class AddUserController {
 
     public void addUser(ActionEvent event){
         try {
-            DBUser.addUser(userNameField.getText(), userPasswordField.getText(), LoginController.user.getUserName(),
-                    adminCheckBox.isSelected());
-            addUserErrorField.setTextFill(Color.BLACK);
-            addUserErrorField.setText("User Record Created");
-            addCustomerBtn.setDisable(true);
-            JDBC.closeConnection();
+            String userName = userNameField.getText();
+            String password = userPasswordField.getText();
+            if(validateFields(userName, password)) {
+                DBUser.addUser(userName, password, LoginController.user.getUserName(),
+                        adminCheckBox.isSelected());
+                addUserErrorField.setTextFill(Color.BLACK);
+                addUserErrorField.setText("User Record Created");
+                addCustomerBtn.setDisable(true);
+                JDBC.closeConnection();
+            }
         }catch(Exception exception){
             addUserErrorField.setTextFill(Color.RED);
             addUserErrorField.setText("Please complete all fields");
             exception.printStackTrace();
         }
+    }
+
+    public boolean validateFields(String userName, String password){
+        if(DataValidation.isValidUserName(userName) && DataValidation.isValidPassword(password)){
+            return true;
+        }else if (!DataValidation.isValidUserName(userName)){
+            DataValidation.entryErrorAlert("User Name");
+        }else if (!DataValidation.isValidPassword(password)){
+            DataValidation.entryErrorAlert("Password");
+        }
+        return false;
     }
 
     public void goToMainMenuWindow(ActionEvent event) throws IOException {

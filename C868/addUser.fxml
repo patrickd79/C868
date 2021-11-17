@@ -7,12 +7,14 @@
     <children>
         <Label alignment="CENTER" layoutX="233.0" layoutY="22.0" prefHeight="39.0" prefWidth="135.0" text="Add User" />
         <TextField fx:id="userNameField" layoutX="39.0" layoutY="118.0" promptText="User Name" />
-        <TextField fx:id="userPasswordField" layoutX="385.0" layoutY="118.0" promptText="Password" />
+        <TextField fx:id="userPasswordField" layoutX="385.0" layoutY="118.0" />
         <Button fx:id="addCustomerBtn" layoutX="476.0" layoutY="356.0" mnemonicParsing="false" onAction="#addUser" text="Add User" />
-        <Label fx:id="addUserErrorField" layoutX="285.0" layoutY="208.0" prefHeight="111.0" prefWidth="275.0" textFill="#d80c0c" />
+        <Label fx:id="addUserErrorField" layoutX="285.0" layoutY="243.0" prefHeight="76.0" prefWidth="275.0" textFill="#d80c0c" />
         <Button layoutX="39.0" layoutY="356.0" mnemonicParsing="false" onAction="#goToMainMenuWindow" text="Go To Main Menu" />
-        <Label layoutX="39.0" layoutY="88.0" prefHeight="27.0" prefWidth="161.0" text="Name" />
+        <Label layoutX="39.0" layoutY="88.0" prefHeight="27.0" prefWidth="161.0" text="User Name" />
         <Label layoutX="385.0" layoutY="83.0" prefHeight="27.0" prefWidth="161.0" text="Password" />
       <CheckBox fx:id="adminCheckBox" layoutX="39.0" layoutY="218.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="135.0" text="Administrator" />
+      <Label alignment="TOP_CENTER" layoutX="385.0" layoutY="152.0" prefHeight="61.0" prefWidth="161.0" text="8-20 characters, letters, numbers, symbols ($,%,&amp;,*,!,_)" wrapText="true" />
+      <Label alignment="TOP_CENTER" layoutX="39.0" layoutY="156.0" prefHeight="51.0" prefWidth="161.0" text="1-50 characters, letters, numbers, or underscore only." wrapText="true" />
     </children>
 </AnchorPane>

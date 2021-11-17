@@ -71,35 +71,64 @@ public class UpdateAppointmentController {
         User user = DBUser.getAUserByName("owner");
         String userID = String.valueOf(user.getUserID());
         {
-            try {
-                String startDateAndTime = startDate +" "+startTime;
-                String endDateAndTime = startDate +" "+endTime;
-                if (AddAppointmentController.isDuringOfficeHours(startDateAndTime, endDateAndTime) &&
-                        !AddAppointmentController.customerHasOverlappingAppointments(String.valueOf(customer.getCustomer_ID()),
-                                startDateAndTime, endDateAndTime, apptID)) {
-                    System.out.println("update appt line 120");
-                    //call DBCustomer update method
-                    DBAppointment.updateAppointment(id, title, location, typeID, startDate,
-                            startTime, endDate, endTime, updatedBy, customerID, userID);
-                    updateApptErrorField.setTextFill(Color.BLACK);
-                    updateApptErrorField.setText("Appointment Record Updated");
-                    updateBtn.setDisable(true);
-                }else if(!AddAppointmentController.isDuringOfficeHours(startDateAndTime, endDateAndTime)){
+            if(validateFields( title,  location,  startDate,  startTime, endTime)) {
+                try {
+                    String startDateAndTime = startDate + " " + startTime;
+                    String endDateAndTime = startDate + " " + endTime;
+                    if (AddAppointmentController.isDuringOfficeHours(startDateAndTime, endDateAndTime) &&
+                            !AddAppointmentController.customerHasOverlappingAppointments(String.valueOf(customer.getCustomer_ID()),
+                                    startDateAndTime, endDateAndTime, apptID)) {
+                        //System.out.println("update appt line 120");
+                        //call DBCustomer update method
+                        DBAppointment.updateAppointment(id, title, location, typeID, startDate,
+                                startTime, endDate, endTime, updatedBy, customerID, userID);
+                        updateApptErrorField.setTextFill(Color.BLACK);
+                        updateApptErrorField.setText("Appointment Record Updated");
+                        updateBtn.setDisable(true);
+                    } else if (!AddAppointmentController.isDuringOfficeHours(startDateAndTime, endDateAndTime)) {
+                        updateApptErrorField.setTextFill(Color.RED);
+                        updateApptErrorField.setText("Please make sure that appointment time is between 0800 EST and 2200 EST.");
+                    } else if (AddAppointmentController.customerHasOverlappingAppointments(String.valueOf(customer.getCustomer_ID()),
+                            startDateAndTime, endDateAndTime, apptID)) {
+                        //System.out.println("update appt line 131");
+                        updateApptErrorField.setTextFill(Color.RED);
+                        updateApptErrorField.setText("Please change the date or time of this appointment. " +
+                                "This appointment overlaps another one of the customer's appointments.");
+                    }
+
+                } catch (Exception exception) {
                     updateApptErrorField.setTextFill(Color.RED);
-                    updateApptErrorField.setText("Please make sure that appointment time is between 0800 EST and 2200 EST.");
-                }else if(AddAppointmentController.customerHasOverlappingAppointments(String.valueOf(customer.getCustomer_ID()),
-                        startDateAndTime, endDateAndTime,apptID)){
-                    System.out.println("update appt line 131");
-                    updateApptErrorField.setTextFill(Color.RED);
-                    updateApptErrorField.setText("Please change the date or time of this appointment. " +
-                            "This appointment overlaps another one of the customer's appointments.");
+                    updateApptErrorField.setText("Please complete all fields");
+                    exception.printStackTrace();
                 }
-            } catch (Exception exception) {
-                updateApptErrorField.setTextFill(Color.RED);
-                updateApptErrorField.setText("Please complete all fields");
-                exception.printStackTrace();
             }
         }
+    }
+
+    public boolean validateFields(String title, String location, String date, String start,
+                                  String end){
+        //System.out.println("Date: " + date);
+        if(DataValidation.isValidTitle(title) && DataValidation.isValidLocation(location) &&
+                DataValidation.isValidDate(date) && DataValidation.isValidTime(start) &&
+                DataValidation.isValidTime(end) && !typeCombo.getSelectionModel().isEmpty()
+                && !customerCombo.getSelectionModel().isEmpty()){
+            return true;
+        }else if (!DataValidation.isValidTitle(title)){
+            DataValidation.entryErrorAlert("Title");
+        }else if (!DataValidation.isValidLocation(location)){
+            DataValidation.entryErrorAlert("Location");
+        }else if (!DataValidation.isValidDate(date)){
+            DataValidation.entryErrorAlert("Date");
+        }else if (!DataValidation.isValidTime(start)){
+            DataValidation.entryErrorAlert("Start Time");
+        }else if (!DataValidation.isValidTime(end)){
+            DataValidation.entryErrorAlert("End Time");
+        }else if (customerCombo.getSelectionModel().isEmpty()){
+            DataValidation.entryErrorAlert("Customer");
+        }else if (typeCombo.getSelectionModel().isEmpty()){
+            DataValidation.entryErrorAlert("Appointment Type");
+        }
+        return false;
     }
 
     public void goToMainMenuWindow(ActionEvent event) throws IOException {

@@ -2,6 +2,7 @@ package C868;
 
 import C868.Entities.User;
 import C868.Helper.DBUser;
+import C868.Helper.DataValidation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,6 +10,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -46,11 +48,14 @@ public class UpdateUserController {
         String userName = user.getUserName();
         updateUserIDLabel.setText(String.valueOf(user.getUserID()));
         updateUserName.setText(userName);
-        if(userName.equals("admin")){
+        if(user.isAdmin()){
+            adminCheckBox.fire();
             updateUserName.setDisable(true);
             updateUserErrorField.setTextFill(Color.BLACK);
-            updateUserErrorField.setText("Username \"admin\" cannot be changed.");
+            updateUserErrorField.setText("Username cannot be changed.");
         }
+        currentPersonUserUpdatedByField.setText(LoginController.user.getUserName());
+        currentPersonUserUpdatedByField.setDisable(true);
         updatePassword.setText(user.getPassword());
         updateUserCreatedBy.setText(user.getCreatedBy());
         updateUserCreatedOn.setText(user.getCreatedDate());
@@ -58,12 +63,23 @@ public class UpdateUserController {
         updateUserLastUpdateDate.setText(user.getLastUpdate());
     }
 
+    public boolean validateFields(String userName, String password){
+        if(DataValidation.isValidUserName(userName) && DataValidation.isValidPassword(password)){
+            return true;
+        }else if (!DataValidation.isValidUserName(userName)){
+            DataValidation.entryErrorAlert("User Name");
+        }else if (!DataValidation.isValidPassword(password)){
+            DataValidation.entryErrorAlert("Password");
+        }
+        return false;
+    }
+
     public void updateUser(ActionEvent event) throws Exception {
         String name = updateUserName.getText();
         String password = updatePassword.getText();
         String updatedBy = currentPersonUserUpdatedByField.getText();
         boolean admin = adminCheckBox.isSelected();
-        if(!updatedBy.isEmpty() && !name.isEmpty() && !password.isEmpty()) {
+        if(validateFields( name,  password)) {
             try {
                 DBUser.updateUser(userID, name, password, updatedBy, admin);
                 updateUserErrorField.setTextFill(Color.BLACK);

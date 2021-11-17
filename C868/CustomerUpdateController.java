@@ -2,12 +2,14 @@ package C868;
 
 import C868.Entities.Customer;
 import C868.Helper.DBCustomer;
+import C868.Helper.DataValidation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -47,8 +49,7 @@ public class CustomerUpdateController {
         String postalCode = updateCustPostalCodeField.getText();
         String phone = updateCustPhoneField.getText();
         String updatedBy = LoginController.user.getUserName();
-        if(!updatedBy.isEmpty() && !name.isEmpty() && !address.isEmpty() && !postalCode.isEmpty() &&
-                !phone.isEmpty()) {
+        if (validateFields(name, address, postalCode, phone)) {
             try {
                 DBCustomer.updateCustomer(customerID, name, address, postalCode, phone, updatedBy);
                 updateCustErrorField.setTextFill(Color.BLACK);
@@ -59,10 +60,23 @@ public class CustomerUpdateController {
                 updateCustErrorField.setText("Please complete all fields");
                 exception.printStackTrace();
             }
-        }else{
-            updateCustErrorField.setTextFill(Color.RED);
-            updateCustErrorField.setText("Please complete all fields");
         }
+    }
+
+    public boolean validateFields(String name, String address, String zip, String phone){
+        if(DataValidation.isValidName(name) && DataValidation.isValidAddress(address) &&
+                DataValidation.isValidPostalCode(zip) && DataValidation.isValidPhoneNumber(phone)){
+            return true;
+        }else if (!DataValidation.isValidName(name)){
+            DataValidation.entryErrorAlert("Name");
+        }else if (!DataValidation.isValidAddress(address)){
+            DataValidation.entryErrorAlert("Address");
+        }else if (!DataValidation.isValidPostalCode(zip)){
+            DataValidation.entryErrorAlert("Postal Code");
+        }else if (!DataValidation.isValidPhoneNumber(phone)){
+            DataValidation.entryErrorAlert("Phone");
+        }
+        return false;
     }
 
     /**

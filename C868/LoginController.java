@@ -3,6 +3,7 @@ package C868;
 import C868.Entities.AdminUser;
 import C868.Entities.User;
 import C868.Helper.DBUser;
+import C868.Helper.DataValidation;
 import C868.Helper.JDBC;
 import C868.Helper.TimeZones;
 import javafx.event.ActionEvent;
@@ -17,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -120,16 +122,29 @@ public class LoginController implements Initializable {
     }
 
     public void getUserInput(){
-        JDBC.openConnection();
         userName = userNameField.getText();
         passwordEntered = passwordField.getText();
-        user = DBUser.getAUserByName(userName);
-        thisUserID = String.valueOf(user.getUserID());
-        validPassword = user.getPassword();
-        if(user.isAdmin()){
-            user = new AdminUser(user.getUserID(),user.getUserName(),user.getPassword(),
-                     user.getCreatedDate(),  user.getCreatedBy(),  user.getLastUpdate(),  user.getLastUpdatedBy(),  true);
+        if(validateFields(userName, passwordEntered)) {
+            JDBC.openConnection();
+            user = DBUser.getAUserByName(userName);
+            thisUserID = String.valueOf(user.getUserID());
+            validPassword = user.getPassword();
+            if (user.isAdmin()) {
+                user = new AdminUser(user.getUserID(), user.getUserName(), user.getPassword(),
+                        user.getCreatedDate(), user.getCreatedBy(), user.getLastUpdate(), user.getLastUpdatedBy(), true);
+            }
         }
+    }
+
+    public boolean validateFields(String userName, String password){
+        if(DataValidation.isValidUserName(userName) && DataValidation.isValidPassword(password)){
+            return true;
+        }else if (!DataValidation.isValidUserName(userName)){
+            DataValidation.entryErrorAlert("User Name");
+        }else if (!DataValidation.isValidPassword(password)){
+            DataValidation.entryErrorAlert("Password");
+        }
+        return false;
     }
 
     public void changeScene(String s, ActionEvent e) throws IOException {

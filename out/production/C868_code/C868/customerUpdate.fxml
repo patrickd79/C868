@@ -6,12 +6,12 @@
 <AnchorPane prefHeight="546.0" prefWidth="978.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="C868.CustomerUpdateController">
     <children>
         <Label layoutX="411.0" layoutY="21.0" text="Update Customer" />
-        <TextField fx:id="updateCustNameField" layoutX="13.0" layoutY="106.0" promptText="Customer Name" />
-        <TextField fx:id="updateCustAddressField" layoutX="13.0" layoutY="168.0" promptText="Address" />
-        <TextField fx:id="updateCustPostalCodeField" layoutX="13.0" layoutY="236.0" promptText="Postal Code" />
-        <TextField fx:id="updateCustPhoneField" layoutX="12.0" layoutY="318.0" promptText="Phone  Number" />
+        <TextField fx:id="updateCustNameField" layoutX="13.0" layoutY="106.0" promptText="First Last" />
+        <TextField fx:id="updateCustAddressField" layoutX="13.0" layoutY="168.0" promptText="123 Any St. , Atlanta, GA" />
+        <TextField fx:id="updateCustPostalCodeField" layoutX="13.0" layoutY="236.0" promptText="11111" />
+        <TextField fx:id="updateCustPhoneField" layoutX="12.0" layoutY="318.0" promptText="111-111-1111" />
         <Button fx:id="updateCustomerBtn" layoutX="642.0" layoutY="480.0" mnemonicParsing="false" onAction="#updateCustomer" text="Update Customer" />
-        <Label fx:id="updateCustErrorField" layoutX="650.0" layoutY="109.0" prefHeight="86.0" prefWidth="275.0" textFill="#d80c0c" />
+        <Label fx:id="updateCustErrorField" layoutX="650.0" layoutY="109.0" prefHeight="184.0" prefWidth="275.0" textFill="#d80c0c" />
       <Label fx:id="updateCustIDLabel" layoutX="14.0" layoutY="35.0" prefHeight="30.0" prefWidth="150.0" text="Customer ID" />
         <Button layoutX="810.0" layoutY="480.0" mnemonicParsing="false" onAction="#goToMainMenuWindow" text="Go To Main Menu" />
       <Label fx:id="updateCustCreatedBy" layoutX="459.0" layoutY="110.0" prefHeight="18.0" prefWidth="150.0" text="Created By" />
@@ -21,7 +21,7 @@
       <Label layoutX="20.0" layoutY="74.0" prefHeight="27.0" prefWidth="186.0" text="Customer Name(First Last)" />
       <Label layoutX="20.0" layoutY="140.0" text="Address" />
       <Label layoutX="20.0" layoutY="205.0" prefHeight="27.0" prefWidth="150.0" text="Postal Code (5 digits)" />
-      <Label layoutX="15.0" layoutY="281.0" prefHeight="27.0" prefWidth="161.0" text="Phone (No Dashes)" />
+      <Label layoutX="15.0" layoutY="281.0" prefHeight="27.0" prefWidth="161.0" text="Phone " />
       <Label layoutX="459.0" layoutY="74.0" text="Created By" />
       <Label layoutX="459.0" layoutY="149.0" text="Created Date" />
       <Label layoutX="251.0" layoutY="97.0" text="Last Updated By" />
