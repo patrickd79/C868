@@ -2,10 +2,7 @@ package C868;
 
 import C868.Entities.AdminUser;
 import C868.Entities.User;
-import C868.Helper.DBUser;
-import C868.Helper.DataValidation;
-import C868.Helper.JDBC;
-import C868.Helper.TimeZones;
+import C868.Helper.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +21,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -65,21 +63,29 @@ public class LoginController implements Initializable {
      * @param event
      * @throws IOException
      */
-    public void logInAttempt(ActionEvent event) throws IOException {
+    public void logInAttempt(ActionEvent event) throws IOException, SQLException {
         thisUser = userNameField.getText();
         String loginMessage;
-        //System.out.println(thisUser);
-        if(verifyLogIn(event)){
-           loginMessage = getLoginInfo(thisUser, "Successful");
-           loginLogging(loginMessage);
-            changeScene("mainMenu.fxml", event);
+
+        //this seeds the database if this is the initial login
+        if(thisUser.equals("initialUser")){
+            JDBC.openConnection();
+            DBSeed.loadDatabase();
         }else {
-            loginMessage = getLoginInfo(thisUser, "Unsuccessful");
-            loginLogging(loginMessage);
-            errorMessageLabel.setText("IncorrectUsernameOrPassword");
+
+            //System.out.println(thisUser);
+            if (verifyLogIn(event)) {
+                loginMessage = getLoginInfo(thisUser, "Successful");
+                loginLogging(loginMessage);
+                changeScene("mainMenu.fxml", event);
+            } else {
+                loginMessage = getLoginInfo(thisUser, "Unsuccessful");
+                loginLogging(loginMessage);
+                errorMessageLabel.setText("IncorrectUsernameOrPassword");
                 logInBtn.setText("Retry");
                 JDBC.closeConnection();
             }
+        }
     }
 
     /**

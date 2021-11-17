@@ -337,3 +337,12 @@ Login Attempt  User: admin, Result: Successful, Timestamp: 2021-11-17 16:09:00.0
 Login Attempt  User: admin, Result: Successful, Timestamp: 2021-11-17 16:12:25.978337 UTC
 
 
+Login Attempt  User: admin, Result: Unsuccessful, Timestamp: 2021-11-17 18:45:08.72376 UTC
+
+
+Login Attempt  User: admin, Result: Successful, Timestamp: 2021-11-17 18:45:13.208841 UTC
+
+
+Login Attempt  User: initialUser, Result: Unsuccessful, Timestamp: 2021-11-17 19:30:19.616861 UTC
+
+

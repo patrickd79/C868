@@ -208,7 +208,6 @@ public class DBAppointment {
     /**
      * Adds an appointment to the database
      * @param title appointment title
-     * @param description appointment description
      * @param location appointment location
      * @param type appointment type
      * @param start appointment start date and time
