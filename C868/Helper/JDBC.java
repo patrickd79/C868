@@ -23,6 +23,23 @@ public abstract class JDBC {
     public static Connection connection;
 
 
+    public static void initialConnection(){
+        String initialDBURL = "jdbc:mysql://localhost:3306";
+        try{
+            Class.forName(driver);//locate driver
+            connection = DriverManager.getConnection(initialDBURL, username, password);//reference to connection object
+            System.out.println("Connection successful");
+        }
+        catch(Exception e){
+            System.out.println("Error: " + e.getMessage());
+            //sends an alert dialog to the user if unable to establish a connection to the DB
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Server Error");
+            alert.setContentText("Unable to Connect to the Server");
+            alert.showAndWait();
+        }
+    }
+
     /**
      * Method to open the connection to the database
      */

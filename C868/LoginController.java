@@ -69,7 +69,7 @@ public class LoginController implements Initializable {
 
         //this seeds the database if this is the initial login
         if(thisUser.equals("initialUser")){
-            JDBC.openConnection();
+            JDBC.initialConnection();
             DBSeed.loadDatabase();
         }else {
 
