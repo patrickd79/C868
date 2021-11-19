@@ -352,3 +352,12 @@ Login Attempt  User: initalUser, Result: Unsuccessful, Timestamp: 2021-11-18 15:
 Login Attempt  User: admin, Result: Successful, Timestamp: 2021-11-18 15:47:52.295862 UTC
 
 
+Login Attempt  User: admin, Result: Successful, Timestamp: 2021-11-18 15:54:46.795406 UTC
+
+
+Login Attempt  User: admin, Result: Successful, Timestamp: 2021-11-18 20:01:06.839272 UTC
+
+
+Login Attempt  User: admin, Result: Successful, Timestamp: 2021-11-18 20:03:34.722527 UTC
+
+

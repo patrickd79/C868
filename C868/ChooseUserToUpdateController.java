@@ -82,12 +82,17 @@ public class ChooseUserToUpdateController {
     }
 
     public void goToUpdateUserWindow(ActionEvent event) throws IOException {
-        userToUpdate();
-        Parent updateUserWindow = FXMLLoader.load(getClass().getResource("updateUser.fxml"));
-        Scene updateUserScene = new Scene(updateUserWindow);
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(updateUserScene);
-        window.show();
+        try {
+            userToUpdate();
+            Parent updateUserWindow = FXMLLoader.load(getClass().getResource("updateUser.fxml"));
+            Scene updateUserScene = new Scene(updateUserWindow);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(updateUserScene);
+            window.show();
+        }catch (Exception ex){
+            updateUserMessage.setTextFill(Color.RED);
+            updateUserMessage.setText("Please choose a user to update.");
+        }
     }
 
     public void goToMainMenuWindow(ActionEvent event) throws IOException {

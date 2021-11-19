@@ -12,7 +12,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 public class ChooseAppointmentToUpdateController {
@@ -80,12 +82,17 @@ public class ChooseAppointmentToUpdateController {
      * @throws IOException
      */
     public void goToUpdateAppointmentWindow(ActionEvent event) throws IOException {
-        apptToUpdate();
-        Parent updateAppointmentWindow = FXMLLoader.load(getClass().getResource("updateAppointment.fxml"));
-        Scene updateAppointmentScene = new Scene(updateAppointmentWindow);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(updateAppointmentScene);
-        window.show();
+        try {
+            apptToUpdate();
+            Parent updateAppointmentWindow = FXMLLoader.load(getClass().getResource("updateAppointment.fxml"));
+            Scene updateAppointmentScene = new Scene(updateAppointmentWindow);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(updateAppointmentScene);
+            window.show();
+        }catch (Exception ex){
+            deleteAppointmentMessage.setTextFill(Color.RED);
+            deleteAppointmentMessage.setText("Please choose an appointment to update.");
+        }
     }
 
     /**

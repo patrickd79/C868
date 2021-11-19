@@ -4,7 +4,7 @@ package C868.Entities;
  * This is the class for the Customer object
  * @author  Patrick Denney
  */
-public class Customer {
+public class Customer extends Appointment {
     private final int customer_ID;
     private String customer_Name;
     private String address;

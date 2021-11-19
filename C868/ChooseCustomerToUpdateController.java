@@ -13,7 +13,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 public class ChooseCustomerToUpdateController {
@@ -107,12 +109,17 @@ public class ChooseCustomerToUpdateController {
      * @throws IOException
      */
     public void goToUpdateCustomerWindow(ActionEvent event) throws IOException {
-        customerToUpdate();
-        Parent updateCustomerWindow = FXMLLoader.load(getClass().getResource("customerUpdate.fxml"));
-        Scene updateCustomerScene = new Scene(updateCustomerWindow);
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(updateCustomerScene);
-        window.show();
+        try {
+            customerToUpdate();
+            Parent updateCustomerWindow = FXMLLoader.load(getClass().getResource("customerUpdate.fxml"));
+            Scene updateCustomerScene = new Scene(updateCustomerWindow);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(updateCustomerScene);
+            window.show();
+        }catch (Exception ex){
+            deleteCustomerMessage.setTextFill(Color.RED);
+            deleteCustomerMessage.setText("Please choose a customer to update.");
+        }
     }
 
     public void goToMainMenuWindow(ActionEvent event) throws IOException {

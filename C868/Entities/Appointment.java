@@ -11,7 +11,7 @@ import C868.Helper.DBType;
 
 public class Appointment {
 
-    private final int appointmentID;
+    private int appointmentID;
     private String title;
 
     private String location;
@@ -25,7 +25,6 @@ public class Appointment {
     private String lastUpdatedBy;
     private int customerID;//fk
     private int userID;//fk
-    private int contactID;//fk
     private String customerName;
 
     /**
@@ -60,6 +59,8 @@ public class Appointment {
         this.userID = userID;
     }
 
+    public Appointment() {
+    }
 
 
     /**
