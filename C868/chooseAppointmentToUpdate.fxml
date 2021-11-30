@@ -5,6 +5,7 @@
 
 <AnchorPane prefHeight="950.0" prefWidth="1351.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="C868.ChooseAppointmentToUpdateController">
     <Button layoutX="688.0" layoutY="718.0" mnemonicParsing="false" onAction="#goToMainMenuWindow" text="Go To Main Menu" />
+    <Label alignment="CENTER" layoutX="241.0" layoutY="29.0" prefHeight="27.0" prefWidth="550.0" text="Choose an Appointment To Update" />
 
     <Button layoutX="49.0" layoutY="718.0" mnemonicParsing="false" onAction="#goToUpdateAppointmentWindow" text="Update Appointment" />
     <TableView fx:id="tableView" layoutX="39.0" layoutY="85.0" prefHeight="254.0" prefWidth="1277.0">

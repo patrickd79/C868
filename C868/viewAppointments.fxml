@@ -3,6 +3,9 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="774.0" prefWidth="1217.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="C868.ViewAppointmentsController">
+    <Label alignment="CENTER" layoutX="487.0" layoutY="29.0" prefHeight="27.0" prefWidth="169.0"
+           text="View Appointments" />
+
     <TableView fx:id="tableView" layoutX="9.0" layoutY="85.0" prefHeight="256.0" prefWidth="1236.0">
         <columns>
             <TableColumn fx:id="IDCol" prefWidth="31.0" text="ID" />

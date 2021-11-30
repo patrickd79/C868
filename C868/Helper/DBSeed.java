@@ -52,11 +52,11 @@ public class DBSeed {
                 "FOREIGN KEY (User_ID) REFERENCES USERS(User_ID));";
         String appointmentData1 = "Insert into APPOINTMENTS(Title, Location, Type, Start, End, Create_Date," +
                 " Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID) Values('Appointment1', " +
-                "'Home', '1', '2021-11-20 09:00:00', '2021-11-20 10:00:00', '2021-11-18 09:24:00', 'owner'," +
+                "'Home', '1', '2021-12-01 09:00:00', '2021-12-01 10:00:00', '2021-11-18 09:24:00', 'owner'," +
                 " '2021-11-18 09:24:00', 'owner', '1', '2');";
         String appointmentData2 = "Insert into APPOINTMENTS(Title, Location, Type, Start, End, Create_Date," +
                 " Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID) Values('Appointment2', " +
-                "'Home', '2', '2021-11-21 09:00:00', '2021-11-21 09:30:00', '2021-11-18 09:24:00', 'owner'," +
+                "'Home', '2', '2021-12-02 09:00:00', '2021-12-02 09:30:00', '2021-11-18 09:24:00', 'owner'," +
                 " '2021-11-18 09:24:00', 'owner', '1', '2');";
         String appointmentData3 = "Insert into APPOINTMENTS(Title, Location, Type, Start, End, Create_Date," +
                 " Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID) Values('Appointment3', " +

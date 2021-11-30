@@ -14,7 +14,7 @@ public abstract class JDBC {
     //private static final String DB_URL = "jdbc:mysql://localhost:3306/" + DBName + "?connectionTimeZone = SERVER";
     //private static final String DB_URL = "jdbc:mysql://localhost:3306/" + DBName + "?connectionTimeZone = UTC";
     private static final String DB_URL = "jdbc:mysql://localhost:3306/" + DBName + "?useLegacyDatetimeCode=false&serverTimeZone = UTC";
-    private static final String username = "sqlUser";
+    private static final String username = "root";
     private static final String password = "Passw0rd!";
     private static final String driver = "com.mysql.cj.jdbc.Driver";
 
